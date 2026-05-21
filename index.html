@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DHANYASRI CNC ENGINEERING SERVICES</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#111;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    min-height:100vh;
+    background:linear-gradient(135deg,#ffffff,#eef2f7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+}
+
+.hero{
+    width:100%;
+    max-width:1300px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.hero-left h1{
+    font-size:70px;
+    line-height:1;
+    font-weight:800;
+    color:#111;
+}
+
+.hero-left h2{
+    font-size:34px;
+    margin-top:10px;
+    color:#333;
+    font-weight:700;
+}
+
+.hero-left p{
+    margin-top:20px;
+    font-size:18px;
+    color:#555;
+    line-height:1.8;
+}
+
+.contact-box{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.contact-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#fff;
+    padding:14px 20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.07);
+    font-size:17px;
+    font-weight:500;
+}
+
+.hero-btns{
+    margin-top:30px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:15px 28px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:#111;
+    color:#fff;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+.btn-outline{
+    background:#fff;
+    border:2px solid #111;
+}
+
+.btn-outline:hover{
+    background:#111;
+    color:#fff;
+}
+
+.hero-right{
+    display:flex;
+    justify-content:center;
+}
+
+.card{
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,0.12);
+}
+
+.card-top{
+    background:#111;
+    color:#fff;
+    padding:30px;
+    text-align:center;
+}
+
+.card-top h3{
+    font-size:34px;
+    font-weight:800;
+}
+
+.card-top p{
+    margin-top:8px;
+    color:#ccc;
+}
+
+.card-body{
+    padding:30px;
+}
+
+.service{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    background:#f5f7fb;
+    padding:16px 18px;
+    border-radius:14px;
+}
+
+.service span{
+    font-weight:600;
+}
+
+/* SECTION */
+
+section{
+    padding:90px 20px;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:50px;
+    font-weight:800;
+}
+
+.section-title p{
+    margin-top:15px;
+    color:#666;
+    font-size:18px;
+}
+
+/* SERVICES */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.service-card{
+    background:#fff;
+    padding:35px;
+    border-radius:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.07);
+    transition:0.4s;
+}
+
+.service-card:hover{
+    transform:translateY(-10px);
+}
+
+.service-icon{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    background:#111;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.service-card h3{
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.service-card p{
+    color:#666;
+    line-height:1.8;
+}
+
+/* WHY */
+
+.why{
+    background:#111;
+    color:#fff;
+    border-radius:30px;
+    padding:60px;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    margin-top:50px;
+}
+
+.why-box{
+    background:#1d1d1d;
+    padding:30px;
+    border-radius:20px;
+}
+
+.why-box h3{
+    margin-bottom:10px;
+}
+
+/* GALLERY */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:20px;
+    height:280px;
+    object-fit:cover;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    color:#fff;
+    padding:60px 20px;
+}
+
+.footer-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer-grid h3{
+    margin-bottom:20px;
+    font-size:24px;
+}
+
+.footer-grid p,
+.footer-grid li{
+    color:#ccc;
+    line-height:2;
+    list-style:none;
+}
+
+.copyright{
+    margin-top:50px;
+    text-align:center;
+    color:#888;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+.hero{
+    grid-template-columns:1fr;
+}
+
+.hero-left h1{
+    font-size:50px;
+}
+
+.hero-left h2{
+    font-size:26px;
+}
+
+.section-title h2{
+    font-size:38px;
+}
+
+.footer-grid{
+    grid-template-columns:1fr;
+}
+
+.why{
+    padding:35px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<header>
+
+<div class="hero">
+
+<div class="hero-left">
+
+<h1>DHANYASRI</h1>
+<h2>CNC ENGINEERING SERVICES</h2>
+
+<p>
+Professional CNC machine service, maintenance, troubleshooting, installation,
+precision machining and engineering support with high-quality service and fast response.
+</p>
+
+<div class="contact-box">
+
+<div class="contact-item">
+📞 +91 94451 65966
+</div>
+
+<div class="contact-item">
+📍 No.234/29, Opp. Medical College, 4th Street, Kamarajar Nagar,
+Chengalpattu - 601003
+</div>
+
+<div class="contact-item">
+⚙ CNC Precision. Perfected.
+</div>
+
+</div>
+
+<div class="hero-btns">
+<button class="btn btn-primary">Contact Now</button>
+<button class="btn btn-outline">Our Services</button>
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<div class="card">
+
+<div class="card-top">
+<h3>Our Services</h3>
+<p>Professional CNC Engineering Solutions</p>
+</div>
+
+<div class="card-body">
+
+<div class="service">
+<span>CNC Turning</span>
+⚙
+</div>
+
+<div class="service">
+<span>CNC Milling</span>
+⚙
+</div>
+
+<div class="service">
+<span>VMC / Machining</span>
+⚙
+</div>
+
+<div class="service">
+<span>Preventive Maintenance</span>
+⚙
+</div>
+
+<div class="service">
+<span>Machine Breakdown Service</span>
+⚙
+</div>
+
+<div class="service">
+<span>Precision Components</span>
+⚙
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>What We Do</h2>
+<p>Complete CNC Machine Service & Engineering Solutions</p>
+</div>
+
+<div class="services-grid">
+
+<div class="service-card">
+<div class="service-icon">🛠</div>
+<h3>CNC Machine Service</h3>
+<p>
+Professional CNC machine troubleshooting, maintenance and service support.
+</p>
+</div>
+
+<div class="service-card">
+<div class="service-icon">⚙</div>
+<h3>Precision Machining</h3>
+<p>
+High accuracy machining solutions for industrial and engineering applications.
+</p>
+</div>
+
+<div class="service-card">
+<div class="service-icon">🔩</div>
+<h3>Machine Installation</h3>
+<p>
+Machine setup, alignment, calibration and commissioning support.
+</p>
+</div>
+
+<div class="service-card">
+<div class="service-icon">📋</div>
+<h3>AMC Support</h3>
+<p>
+Annual maintenance contract and preventive maintenance solutions.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="why">
+
+<div class="section-title">
+<h2>Why Choose Us</h2>
+<p>Trusted CNC Engineering Partner</p>
+</div>
+
+<div class="why-grid">
+
+<div class="why-box">
+<h3>✔ Experienced Service</h3>
+<p>Professional CNC troubleshooting and technical support.</p>
+</div>
+
+<div class="why-box">
+<h3>✔ Fast Response</h3>
+<p>Quick breakdown support and onsite engineering assistance.</p>
+</div>
+
+<div class="why-box">
+<h3>✔ Quality Work</h3>
+<p>Reliable and precision-focused engineering services.</p>
+</div>
+
+<div class="why-box">
+<h3>✔ Customer Support</h3>
+<p>Dedicated service support with customer satisfaction.</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+<h2>Machine Gallery</h2>
+<p>Our CNC Engineering Works</p>
+</div>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+<h3>DHANYASRI CNC ENGINEERING SERVICES</h3>
+<p>
+Professional CNC machine service and engineering solutions with trusted customer support and precision work.
+</p>
+</div>
+
+<div>
+<h3>Services</h3>
+<ul>
+<li>CNC Turning</li>
+<li>CNC Milling</li>
+<li>Preventive Maintenance</li>
+<li>Machine Service</li>
+</ul>
+</div>
+
+<div>
+<h3>Contact</h3>
+<ul>
+<li>📞 94451 65966</li>
+<li>📍 Chengalpattu - 601003</li>
+<li>🛠 CNC Engineering Service</li>
+</ul>
+</div>
+
+</div>
+
+<div class="copyright">
+© 2026 DHANYASRI CNC ENGINEERING SERVICES — All Rights Reserved.
+</div>
+
+</footer>
+
+</body>
+</html>
