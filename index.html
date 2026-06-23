@@ -1,591 +1,718 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>DHANYASRI CNC ENGINEERING SERVICES</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DHANYASRI CNC · Engineering</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+  <!-- Font Awesome Icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-body{
-    background:#f5f7fb;
-    color:#111;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-/* HEADER */
+    body {
+      background: #f6f8fc;
+      color: #111;
+      scroll-behavior: smooth;
+    }
 
-header{
-    width:100%;
-    min-height:100vh;
-    background:linear-gradient(135deg,#ffffff,#eef2f7);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:40px 20px;
-}
+    /* ---------- HEADER / HERO ---------- */
+    header {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(145deg, #ffffff 0%, #edf2f9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.hero{
-    width:100%;
-    max-width:1300px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
-}
+    header::before {
+      content: '';
+      position: absolute;
+      right: -10%;
+      top: -20%;
+      width: 600px;
+      height: 600px;
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 50%;
+      pointer-events: none;
+    }
 
-.hero-left h1{
-    font-size:70px;
-    line-height:1;
-    font-weight:800;
-    color:#111;
-}
+    .hero {
+      width: 100%;
+      max-width: 1300px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
 
-.hero-left h2{
-    font-size:34px;
-    margin-top:10px;
-    color:#333;
-    font-weight:700;
-}
+    /* logo + icon */
+    .brand-icon {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
 
-.hero-left p{
-    margin-top:20px;
-    font-size:18px;
-    color:#555;
-    line-height:1.8;
-}
+    .icon-circle {
+      background: #111;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+      transition: 0.25s;
+    }
 
-.contact-box{
-    margin-top:30px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
+    .icon-circle span {
+      transform: rotate(-4deg);
+      display: inline-block;
+    }
 
-.contact-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    background:#fff;
-    padding:14px 20px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.07);
-    font-size:17px;
-    font-weight:500;
-}
+    .brand-tagline {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #444;
+      background: rgba(0,0,0,0.04);
+      padding: 6px 18px;
+      border-radius: 40px;
+      display: inline-block;
+    }
 
-.hero-btns{
-    margin-top:30px;
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-}
+    .hero-left h1 {
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 900;
+      color: #0b0b0b;
+      letter-spacing: -1px;
+    }
 
-.btn{
-    padding:15px 28px;
-    border:none;
-    border-radius:12px;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s;
-}
+    .hero-left h1 .highlight {
+      background: linear-gradient(130deg, #1a1a1a, #3d3d3d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-.btn-primary{
-    background:#111;
-    color:#fff;
-}
+    .hero-left h2 {
+      font-size: 34px;
+      margin-top: 6px;
+      font-weight: 700;
+      color: #1d1d1d;
+      letter-spacing: -0.5px;
+    }
 
-.btn-primary:hover{
-    transform:translateY(-3px);
-}
+    .hero-left p {
+      margin-top: 18px;
+      font-size: 18px;
+      color: #444;
+      line-height: 1.8;
+      max-width: 540px;
+    }
 
-.btn-outline{
-    background:#fff;
-    border:2px solid #111;
-}
+    .contact-box {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-.btn-outline:hover{
-    background:#111;
-    color:#fff;
-}
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #ffffffdd;
+      backdrop-filter: blur(2px);
+      padding: 14px 22px;
+      border-radius: 60px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      font-size: 16px;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.6);
+      transition: 0.2s;
+    }
 
-.hero-right{
-    display:flex;
-    justify-content:center;
-}
+    .contact-item i {
+      font-size: 20px;
+      color: #111;
+      width: 28px;
+      text-align: center;
+    }
 
-.card{
-    width:100%;
-    max-width:500px;
-    background:#fff;
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 20px 40px rgba(0,0,0,0.12);
-}
+    .hero-btns {
+      margin-top: 34px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
 
-.card-top{
-    background:#111;
-    color:#fff;
-    padding:30px;
-    text-align:center;
-}
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 60px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.card-top h3{
-    font-size:34px;
-    font-weight:800;
-}
+    .btn-primary {
+      background: #0b0b0b;
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
 
-.card-top p{
-    margin-top:8px;
-    color:#ccc;
-}
+    .btn-primary:hover {
+      background: #2b2b2b;
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+    }
 
-.card-body{
-    padding:30px;
-}
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #111;
+    }
 
-.service{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-    background:#f5f7fb;
-    padding:16px 18px;
-    border-radius:14px;
-}
+    .btn-outline:hover {
+      background: #111;
+      color: #fff;
+      transform: translateY(-4px);
+    }
 
-.service span{
-    font-weight:600;
-}
+    /* right card */
+    .hero-right {
+      display: flex;
+      justify-content: center;
+    }
 
-/* SECTION */
+    .card {
+      width: 100%;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.10);
+      transition: 0.3s;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
 
-section{
-    padding:90px 20px;
-}
+    .card-top {
+      background: #0d0d0d;
+      color: #fff;
+      padding: 30px 28px;
+      text-align: center;
+      position: relative;
+    }
 
-.container{
-    max-width:1250px;
-    margin:auto;
-}
+    .card-top h3 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
 
-.section-title{
-    text-align:center;
-    margin-bottom:60px;
-}
+    .card-top p {
+      margin-top: 6px;
+      color: #b0b0b0;
+      font-weight: 400;
+      font-size: 15px;
+    }
 
-.section-title h2{
-    font-size:50px;
-    font-weight:800;
-}
+    .card-body {
+      padding: 28px 26px;
+      background: #fafcff;
+    }
 
-.section-title p{
-    margin-top:15px;
-    color:#666;
-    font-size:18px;
-}
+    .service {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      background: #ffffff;
+      padding: 14px 18px;
+      border-radius: 60px;
+      border: 1px solid #eaeef5;
+      font-weight: 500;
+      transition: 0.2s;
+    }
 
-/* SERVICES */
+    .service:hover {
+      background: #f0f4fe;
+      border-color: #bcc9db;
+    }
 
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-}
+    .service span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.service-card{
-    background:#fff;
-    padding:35px;
-    border-radius:22px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.07);
-    transition:0.4s;
-}
+    .service i {
+      color: #1a1a1a;
+      font-size: 16px;
+    }
 
-.service-card:hover{
-    transform:translateY(-10px);
-}
+    /* SECTION base */
+    section {
+      padding: 90px 20px;
+    }
 
-.service-icon{
-    width:70px;
-    height:70px;
-    border-radius:18px;
-    background:#111;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-    margin-bottom:20px;
-}
+    .container {
+      max-width: 1250px;
+      margin: auto;
+    }
 
-.service-card h3{
-    margin-bottom:15px;
-    font-size:24px;
-}
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-.service-card p{
-    color:#666;
-    line-height:1.8;
-}
+    .section-title h2 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
 
-/* WHY */
+    .section-title p {
+      margin-top: 12px;
+      color: #666;
+      font-size: 18px;
+    }
 
-.why{
-    background:#111;
-    color:#fff;
-    border-radius:30px;
-    padding:60px;
-}
+    /* SERVICES GRID */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+    }
 
-.why-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-    margin-top:50px;
-}
+    .service-card {
+      background: #fff;
+      padding: 38px 30px;
+      border-radius: 28px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
 
-.why-box{
-    background:#1d1d1d;
-    padding:30px;
-    border-radius:20px;
-}
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
 
-.why-box h3{
-    margin-bottom:10px;
-}
+    .service-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: #0b0b0b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 22px;
+    }
 
-/* GALLERY */
+    .service-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
+    .service-card p {
+      color: #666;
+      line-height: 1.7;
+    }
 
-.gallery img{
-    width:100%;
-    border-radius:20px;
-    height:280px;
-    object-fit:cover;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
+    /* WHY dark */
+    .why {
+      background: #0d0d0d;
+      color: #fff;
+      border-radius: 40px;
+      padding: 60px 50px;
+    }
 
-/* FOOTER */
+    .why .section-title h2 {
+      color: #fff;
+    }
 
-footer{
-    background:#111;
-    color:#fff;
-    padding:60px 20px;
-}
+    .why .section-title p {
+      color: #b0b0b0;
+    }
 
-.footer-grid{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:40px;
-}
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
 
-.footer-grid h3{
-    margin-bottom:20px;
-    font-size:24px;
-}
+    .why-box {
+      background: #1b1b1b;
+      padding: 32px 28px;
+      border-radius: 24px;
+      transition: 0.2s;
+      border: 1px solid #2a2a2a;
+    }
 
-.footer-grid p,
-.footer-grid li{
-    color:#ccc;
-    line-height:2;
-    list-style:none;
-}
+    .why-box h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.copyright{
-    margin-top:50px;
-    text-align:center;
-    color:#888;
-    font-size:14px;
-}
+    .why-box p {
+      color: #bcbcbc;
+      line-height: 1.6;
+    }
 
-/* RESPONSIVE */
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
 
-@media(max-width:950px){
+    .gallery figure {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      transition: 0.25s;
+      background: #fff;
+    }
 
-.hero{
-    grid-template-columns:1fr;
-}
+    .gallery figure:hover {
+      transform: scale(1.01);
+    }
 
-.hero-left h1{
-    font-size:50px;
-}
+    .gallery img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
 
-.hero-left h2{
-    font-size:26px;
-}
+    .gallery figcaption {
+      padding: 16px 20px 20px;
+      font-weight: 500;
+      color: #222;
+      background: #fff;
+      border-top: 1px solid #f0f0f0;
+    }
 
-.section-title h2{
-    font-size:38px;
-}
+    /* FOOTER */
+    footer {
+      background: #0b0b0b;
+      color: #fff;
+      padding: 60px 24px 30px;
+    }
 
-.footer-grid{
-    grid-template-columns:1fr;
-}
+    .footer-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+    }
 
-.why{
-    padding:35px;
-}
+    .footer-grid h3 {
+      font-size: 22px;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
 
-}
+    .footer-grid p,
+    .footer-grid li {
+      color: #cfcfcf;
+      line-height: 2;
+      list-style: none;
+    }
 
-</style>
+    .footer-grid ul {
+      padding-left: 0;
+    }
+
+    .footer-grid li i {
+      margin-right: 10px;
+      width: 20px;
+      color: #aaa;
+    }
+
+    .copyright {
+      margin-top: 50px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      border-top: 1px solid #222;
+      padding-top: 30px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 950px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-left h1 {
+        font-size: 52px;
+      }
+      .hero-left h2 {
+        font-size: 28px;
+      }
+      .section-title h2 {
+        font-size: 38px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .why {
+        padding: 40px 24px;
+      }
+      .card {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero-left h1 {
+        font-size: 38px;
+      }
+      .hero-left h2 {
+        font-size: 22px;
+      }
+      .contact-item {
+        font-size: 14px;
+        padding: 12px 16px;
+      }
+    }
+
+    /* smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
+  <div class="hero">
 
-<div class="hero">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <!-- brand icon + name -->
+      <div class="brand-icon">
+        <div class="icon-circle"><span>D</span></div>
+        <div>
+          <div style="font-weight:700; font-size:22px; letter-spacing:-0.5px;">DHANYASRI</div>
+          <div class="brand-tagline"><i class="fas fa-cog" style="margin-right:6px;"></i> CNC ENGINEERING</div>
+        </div>
+      </div>
 
-<div class="hero-left">
+      <h1><span class="highlight">Precision</span> <br>Machined.</h1>
+      <h2>CNC ENGINEERING SERVICES</h2>
 
-<h1>DHANYASRI</h1>
-<h2>CNC ENGINEERING SERVICES</h2>
+      <p>
+        Professional CNC machine service, maintenance, troubleshooting, installation,
+        precision machining and engineering support — with high-quality service and fast response.
+      </p>
 
-<p>
-Professional CNC machine service, maintenance, troubleshooting, installation,
-precision machining and engineering support with high-quality service and fast response.
-</p>
+      <div class="contact-box">
+        <div class="contact-item">
+          <i class="fas fa-phone-alt"></i> +91 94451 65966
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-pin"></i> No.234/29, Opp. Medical College, 4th Street, Kamarajar Nagar, Chengalpattu - 601003
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i> dhanyasricnc@gmail.com
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-microchip"></i> CNC Precision. Perfected.
+        </div>
+      </div>
 
-<div class="contact-box">
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Contact Now</a>
+        <a href="#services" class="btn btn-outline"><i class="fas fa-cogs"></i> Our Services</a>
+      </div>
+    </div>
 
-<div class="contact-item">
-📞 +91 94451 65966
-</div>
+    <!-- RIGHT CARD -->
+    <div class="hero-right">
+      <div class="card">
+        <div class="card-top">
+          <h3><i class="fas fa-cubes" style="margin-right:10px;"></i> Our Services</h3>
+          <p>Professional CNC Engineering Solutions</p>
+        </div>
+        <div class="card-body">
+          <div class="service"><span><i class="fas fa-arrow-right"></i> CNC Turning</span> <i class="fas fa-cog"></i></div>
+          <div class="service"><span><i class="fas fa-arrow-right"></i> CNC Milling</span> <i class="fas fa-cog"></i></div>
+          <div class="service"><span><i class="fas fa-arrow-right"></i> VMC / Machining</span> <i class="fas fa-cog"></i></div>
+          <div class="service"><span><i class="fas fa-arrow-right"></i> Preventive Maintenance</span> <i class="fas fa-tools"></i></div>
+          <div class="service"><span><i class="fas fa-arrow-right"></i> Machine Breakdown Service</span> <i class="fas fa-bolt"></i></div>
+          <div class="service"><span><i class="fas fa-arrow-right"></i> Precision Components</span> <i class="fas fa-microchip"></i></div>
+        </div>
+      </div>
+    </div>
 
-<div class="contact-item">
-📍 No.234/29, Opp. Medical College, 4th Street, Kamarajar Nagar,
-Chengalpattu - 601003
-</div>
-
-<div class="contact-item">
-⚙ CNC Precision. Perfected.
-</div>
-
-</div>
-
-<div class="hero-btns">
-<button class="btn btn-primary">Contact Now</button>
-<button class="btn btn-outline">Our Services</button>
-</div>
-
-</div>
-
-<div class="hero-right">
-
-<div class="card">
-
-<div class="card-top">
-<h3>Our Services</h3>
-<p>Professional CNC Engineering Solutions</p>
-</div>
-
-<div class="card-body">
-
-<div class="service">
-<span>CNC Turning</span>
-⚙
-</div>
-
-<div class="service">
-<span>CNC Milling</span>
-⚙
-</div>
-
-<div class="service">
-<span>VMC / Machining</span>
-⚙
-</div>
-
-<div class="service">
-<span>Preventive Maintenance</span>
-⚙
-</div>
-
-<div class="service">
-<span>Machine Breakdown Service</span>
-⚙
-</div>
-
-<div class="service">
-<span>Precision Components</span>
-⚙
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+  </div>
 </header>
 
-<section>
+<!-- ===== SECTION: WHAT WE DO ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-title">
+      <h2>What We Do</h2>
+      <p>Complete CNC Machine Service &amp; Engineering Solutions</p>
+    </div>
 
-<div class="container">
-
-<div class="section-title">
-<h2>What We Do</h2>
-<p>Complete CNC Machine Service & Engineering Solutions</p>
-</div>
-
-<div class="services-grid">
-
-<div class="service-card">
-<div class="service-icon">🛠</div>
-<h3>CNC Machine Service</h3>
-<p>
-Professional CNC machine troubleshooting, maintenance and service support.
-</p>
-</div>
-
-<div class="service-card">
-<div class="service-icon">⚙</div>
-<h3>Precision Machining</h3>
-<p>
-High accuracy machining solutions for industrial and engineering applications.
-</p>
-</div>
-
-<div class="service-card">
-<div class="service-icon">🔩</div>
-<h3>Machine Installation</h3>
-<p>
-Machine setup, alignment, calibration and commissioning support.
-</p>
-</div>
-
-<div class="service-card">
-<div class="service-icon">📋</div>
-<h3>AMC Support</h3>
-<p>
-Annual maintenance contract and preventive maintenance solutions.
-</p>
-</div>
-
-</div>
-
-</div>
-
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-wrench"></i></div>
+        <h3>CNC Machine Service</h3>
+        <p>Professional CNC machine troubleshooting, maintenance and service support with rapid diagnostics.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-cog"></i></div>
+        <h3>Precision Machining</h3>
+        <p>High accuracy machining solutions for industrial, automotive and engineering applications.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-tools"></i></div>
+        <h3>Machine Installation</h3>
+        <p>Machine setup, alignment, calibration and full commissioning support for new equipment.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+        <h3>AMC Support</h3>
+        <p>Annual maintenance contract &amp; preventive maintenance solutions to maximise uptime.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ===== WHY CHOOSE US ===== -->
 <section>
+  <div class="container">
+    <div class="why">
+      <div class="section-title">
+        <h2>Why Choose Us</h2>
+        <p>Trusted CNC Engineering Partner</p>
+      </div>
 
-<div class="container">
-
-<div class="why">
-
-<div class="section-title">
-<h2>Why Choose Us</h2>
-<p>Trusted CNC Engineering Partner</p>
-</div>
-
-<div class="why-grid">
-
-<div class="why-box">
-<h3>✔ Experienced Service</h3>
-<p>Professional CNC troubleshooting and technical support.</p>
-</div>
-
-<div class="why-box">
-<h3>✔ Fast Response</h3>
-<p>Quick breakdown support and onsite engineering assistance.</p>
-</div>
-
-<div class="why-box">
-<h3>✔ Quality Work</h3>
-<p>Reliable and precision-focused engineering services.</p>
-</div>
-
-<div class="why-box">
-<h3>✔ Customer Support</h3>
-<p>Dedicated service support with customer satisfaction.</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+      <div class="why-grid">
+        <div class="why-box">
+          <h3><i class="fas fa-check-circle" style="color:#4caf50;"></i> Experienced Service</h3>
+          <p>Professional CNC troubleshooting and technical support with deep industry knowledge.</p>
+        </div>
+        <div class="why-box">
+          <h3><i class="fas fa-clock" style="color:#ffb74d;"></i> Fast Response</h3>
+          <p>Quick breakdown support and onsite engineering assistance – minimal downtime.</p>
+        </div>
+        <div class="why-box">
+          <h3><i class="fas fa-medal" style="color:#fdd835;"></i> Quality Work</h3>
+          <p>Reliable, precision-focused engineering services with strict quality checks.</p>
+        </div>
+        <div class="why-box">
+          <h3><i class="fas fa-headset" style="color:#64b5f6;"></i> Customer Support</h3>
+          <p>Dedicated service support with a strong focus on customer satisfaction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ===== GALLERY ===== -->
 <section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Machine Gallery</h2>
+      <p>Our CNC Engineering Works</p>
+    </div>
 
-<div class="container">
-
-<div class="section-title">
-<h2>Machine Gallery</h2>
-<p>Our CNC Engineering Works</p>
-</div>
-
-<div class="gallery">
-
-<img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1200&auto=format&fit=crop">
-
-<img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=1200&auto=format&fit=crop">
-
-<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop">
-
-</div>
-
-</div>
-
+    <div class="gallery">
+      <figure>
+        <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?q=80&w=1200&auto=format&fit=crop" alt="CNC Machine">
+        <figcaption><i class="fas fa-cogs" style="margin-right:8px;"></i> CNC Milling Center</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=1200&auto=format&fit=crop" alt="Precision engineering">
+        <figcaption><i class="fas fa-ruler-combined" style="margin-right:8px;"></i> Precision Components</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop" alt="Workshop">
+        <figcaption><i class="fas fa-industry" style="margin-right:8px;"></i> Machine Workshop</figcaption>
+      </figure>
+    </div>
+  </div>
 </section>
 
-<footer>
+<!-- ===== FOOTER ===== -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <h3><i class="fas fa-cog" style="margin-right:10px;"></i> DHANYASRI CNC</h3>
+      <p style="max-width:350px;">
+        Professional CNC machine service and engineering solutions with trusted customer support and precision work.
+      </p>
+      <div style="margin-top:14px; display:flex; gap:16px; font-size:22px;">
+        <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+        <i class="fab fa-linkedin-in"></i>
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
 
-<div class="footer-grid">
+    <div>
+      <h3>Services</h3>
+      <ul>
+        <li><i class="fas fa-angle-right"></i> CNC Turning</li>
+        <li><i class="fas fa-angle-right"></i> CNC Milling</li>
+        <li><i class="fas fa-angle-right"></i> Preventive Maintenance</li>
+        <li><i class="fas fa-angle-right"></i> Machine Service</li>
+      </ul>
+    </div>
 
-<div>
-<h3>DHANYASRI CNC ENGINEERING SERVICES</h3>
-<p>
-Professional CNC machine service and engineering solutions with trusted customer support and precision work.
-</p>
-</div>
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-phone-alt"></i> +91 94451 65966</li>
+        <li><i class="fas fa-envelope"></i> dhanyasricnc@gmail.com</li>
+        <li><i class="fas fa-map-marker-alt"></i> Chengalpattu - 601003</li>
+        <li><i class="fas fa-tools"></i> CNC Engineering Service</li>
+      </ul>
+    </div>
+  </div>
 
-<div>
-<h3>Services</h3>
-<ul>
-<li>CNC Turning</li>
-<li>CNC Milling</li>
-<li>Preventive Maintenance</li>
-<li>Machine Service</li>
-</ul>
-</div>
-
-<div>
-<h3>Contact</h3>
-<ul>
-<li>📞 94451 65966</li>
-<li>📍 Chengalpattu - 601003</li>
-<li>🛠 CNC Engineering Service</li>
-</ul>
-</div>
-
-</div>
-
-<div class="copyright">
-© 2026 DHANYASRI CNC ENGINEERING SERVICES — All Rights Reserved.
-</div>
-
+  <div class="copyright">
+    © 2026 DHANYASRI CNC ENGINEERING SERVICES — All Rights Reserved.
+  </div>
 </footer>
 
 </body>
