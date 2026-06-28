@@ -913,8 +913,7 @@
 <script>
   (function() {
     // Initialize EmailJS with your Public Key
-    // 🔑 REPLACE 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
-    // Sign up free at https://www.emailjs.com/
+    // 🔑 Get your free API key at https://www.emailjs.com/
     emailjs.init('YOUR_PUBLIC_KEY');
 
     const form = document.getElementById('contactForm');
@@ -963,8 +962,13 @@
         to_email: 'dhanyasricnc@gmail.com'
       };
 
-      // 🔑 REPLACE 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your EmailJS IDs
-      emailjs.send('service_iickp15', 'template_u3mzp7a', templateParams)
+      // 🔑 Replace with your actual EmailJS Service ID and Template ID
+      // To get these:
+      // 1. Go to https://www.emailjs.com/
+      // 2. Create a Service (e.g., 'service_xxxxxxx')
+      // 3. Create a Template with the fields: from_name, from_email, phone, service, message
+      // 4. Copy the Template ID (e.g., 'template_xxxxxxx')
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           showToast('✅ Message sent successfully! We\'ll respond within 24 hours.', 'success');
