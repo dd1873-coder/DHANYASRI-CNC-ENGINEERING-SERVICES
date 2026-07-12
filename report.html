@@ -321,6 +321,8 @@ button.btn-secondary:hover {
     <td><input id="serialNo" class="save-state" placeholder="Enter Serial No"></td>
 </tr>
 <tr>
+    <td>Customer Machine No</td>
+    <td><input id="custMachineNo" class="save-state" placeholder="Enter Customer Machine Number"></td>
     <td>Service Type</td>
     <td>
         <select id="serviceType" class="save-state">
@@ -328,8 +330,6 @@ button.btn-secondary:hover {
             <option>AMC</option>
         </select>
     </td>
-    <td>Customer Machine No</td>
-    <td><input id="custMachineNo" class="save-state" placeholder="Enter Customer Machine Number"></td>
 </tr>
 </table>
 
@@ -376,22 +376,20 @@ button.btn-secondary:hover {
 <h3>Billing & Service Charges</h3>
 <table>
 <tr>
-    <td width="25%">Service Hours Worked</td>
-    <td width="25%"><input type="number" id="billHours" class="save-state bill-calc" placeholder="0" min="0" step="0.5"></td>
-    <td width="25%">Hourly Service Rate</td>
-    <td width="25%"><input type="number" id="billRate" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td width="25%">Service Hours</td>
+    <td width="25%"><input type="text" id="billHours" class="save-state" placeholder="Enter hours (e.g., 4 hrs)"></td>
+    <td width="25%">Total Service Charges</td>
+    <td width="25%"><input type="number" id="totalServiceRow" class="save-state bill-calc" placeholder="0.00" min="0"></td>
 </tr>
 <tr>
-    <td>Total Service Charges</td>
-    <td><input type="number" id="totalServiceRow" placeholder="0.00" readonly style="font-weight: bold; color: #444;"></td>
     <td>Spare Parts Cost Total</td>
     <td><input type="number" id="billSpares" class="save-state bill-calc" placeholder="0.00" min="0"></td>
-</tr>
-<tr>
     <td>Transport / Conveyance</td>
     <td><input type="number" id="billTransport" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+</tr>
+<tr>
     <td>Other Incidental Costs</td>
-    <td><input type="number" id="billOther" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td colspan="3"><input type="number" id="billOther" class="save-state bill-calc" placeholder="0.00" min="0"></td>
 </tr>
 <tr class="total-row">
     <td colspan="3" style="text-align: right; font-size: 16px;">Total Amount Due:</td>
@@ -464,14 +462,10 @@ function autoResizeTextareas() {
 }
 
 function calculateBilling() {
-    const hours = parseFloat(document.getElementById('billHours').value) || 0;
-    const rate = parseFloat(document.getElementById('billRate').value) || 0;
+    const serviceTotal = parseFloat(document.getElementById('totalServiceRow').value) || 0;
     const spares = parseFloat(document.getElementById('billSpares').value) || 0;
     const transport = parseFloat(document.getElementById('billTransport').value) || 0;
     const other = parseFloat(document.getElementById('billOther').value) || 0;
-
-    const serviceTotal = hours * rate;
-    document.getElementById('totalServiceRow').value = serviceTotal.toFixed(2);
 
     const overallTotal = serviceTotal + spares + transport + other;
     document.getElementById('billTotalAmount').value = overallTotal.toFixed(2);
