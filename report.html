@@ -31,7 +31,7 @@ body{
 }
 
 .logo-box {
-    width: 150px;
+    width: 140px;
     height: auto;
 }
 
@@ -43,23 +43,39 @@ body{
 
 .title-box {
     flex-grow: 1;
-    text-align: center;
-    padding-right: 20px; /* Balances out layout due to logo on left */
+    text-align: left;
+    padding-left: 20px;
 }
 
 .title-box h1 {
     color:#003366;
     margin: 0 0 5px 0;
-    font-size: 28px;
-    letter-spacing: 1px;
+    font-size: 26px;
+    letter-spacing: 0.5px;
 }
 
 .title-box h2 {
     color: #444;
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
     letter-spacing: 2px;
+}
+
+/* Right side block for Report metadata */
+.header-meta-box {
+    text-align: right;
+    min-width: 240px;
+}
+
+.header-meta-box table {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.header-meta-box table td {
+    padding: 4px 6px;
+    font-size: 13px;
 }
 
 h3{
@@ -95,8 +111,8 @@ input,textarea,select{
 }
 
 textarea{
-    resize:none; /* Disabled manual resize handle since it auto-grows */
-    overflow:hidden; /* Removes unnecessary scrollbars */
+    resize:none;
+    overflow:hidden;
     min-height:60px;
     display: block;
 }
@@ -182,6 +198,11 @@ button.btn-secondary:hover {
     background: #444;
 }
 
+.total-row {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
 @media print{
     @page {
         margin: 0.5cm;
@@ -220,7 +241,7 @@ button.btn-secondary:hover {
         display: block !important;
     }
     
-    .details-title {
+    .details-title, .total-row {
         background-color: #e6e6e6 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -230,7 +251,6 @@ button.btn-secondary:hover {
         min-height: auto;
     }
     
-    /* Ensures background logo graphics show clearly if printing to physical paper */
     img {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -244,30 +264,35 @@ button.btn-secondary:hover {
 
 <div class="container">
 
-<!-- Brand Header Layout featuring Logo Box -->
+<!-- Brand Header Layout featuring Logo, Title, and Right-Aligned Report Meta Block -->
 <div class="header-container">
     <div class="logo-box">
-        <!-- Make sure to keep your image file named 'logo_b.png' in the identical folder -->
         <img src="logo_b.png" alt="DHANANSRI CNC logo" onerror="this.style.display='none';">
     </div>
     <div class="title-box">
         <h1>DHANYASRI CNC MACHINE SERVICES</h1>
         <h2>BREAKDOWN SERVICE REPORT</h2>
     </div>
+    <div class="header-meta-box">
+        <table>
+            <tr>
+                <td width="40%" style="font-weight: bold; background-color: #f9f9f9;">Report No:</td>
+                <td><input id="reportNo" class="save-state" placeholder="Enter No" style="text-align: right;"></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; background-color: #f9f9f9;">Date:</td>
+                <td><input type="date" id="reportDate" class="save-state" style="text-align: right;"></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <table>
 <tr>
-    <td width="15%">Report No</td>
-    <td width="35%"><input id="reportNo" class="save-state" placeholder="Enter Report Number"></td>
-    <td width="15%">Date</td>
-    <td width="35%"><input type="date" id="reportDate" class="save-state"></td>
-</tr>
-<tr>
-    <td>Customer Name M/S</td>
-    <td><input id="customerName" class="save-state" placeholder="Enter Customer Name"></td>
-    <td>Start Time</td>
-    <td><input type="time" id="startTime" class="save-state"></td>
+    <td width="20%">Customer Name M/S</td>
+    <td width="40%"><input id="customerName" class="save-state" placeholder="Enter Customer Name"></td>
+    <td width="15%">Start Time</td>
+    <td width="25%"><input type="time" id="startTime" class="save-state"></td>
 </tr>
 <tr>
     <td>Contact Person</td>
@@ -297,7 +322,14 @@ button.btn-secondary:hover {
 </tr>
 <tr>
     <td>Customer Machine No</td>
-    <td colspan="3"><input id="custMachineNo" class="save-state" placeholder="Enter Customer Machine Number"></td>
+    <td><input id="custMachineNo" class="save-state" placeholder="Enter Customer Machine Number"></td>
+    <td>Service Type</td>
+    <td>
+        <select id="serviceType" class="save-state">
+            <option>OW</option>
+            <option>AMC</option>
+        </select>
+    </td>
 </tr>
 </table>
 
@@ -340,6 +372,32 @@ button.btn-secondary:hover {
     </table>
 </div>
 <button type="button" class="no-print" style="margin-bottom: 15px;" onclick="addSpareRow()">+ Add Spare Part</button>
+
+<h3>Billing & Service Charges</h3>
+<table>
+<tr>
+    <td width="25%">Service Hours Worked</td>
+    <td width="25%"><input type="number" id="billHours" class="save-state bill-calc" placeholder="0" min="0" step="0.5"></td>
+    <td width="25%">Hourly Service Rate</td>
+    <td width="25%"><input type="number" id="billRate" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+</tr>
+<tr>
+    <td>Total Service Charges</td>
+    <td><input type="number" id="totalServiceRow" placeholder="0.00" readonly style="font-weight: bold; color: #444;"></td>
+    <td>Spare Parts Cost Total</td>
+    <td><input type="number" id="billSpares" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+</tr>
+<tr>
+    <td>Transport / Conveyance</td>
+    <td><input type="number" id="billTransport" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td>Other Incidental Costs</td>
+    <td><input type="number" id="billOther" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+</tr>
+<tr class="total-row">
+    <td colspan="3" style="text-align: right; font-size: 16px;">Total Amount Due:</td>
+    <td><input type="number" id="billTotalAmount" placeholder="0.00" readonly style="font-weight: bold; font-size: 16px; color: #003366;"></td>
+</tr>
+</table>
 
 <h3>Machine Status</h3>
 <table>
@@ -398,12 +456,25 @@ button.btn-secondary:hover {
 </div>
 
 <script>
-// Auto-resize logic for textareas based on typed content length
 function autoResizeTextareas() {
     document.querySelectorAll('textarea.auto-resize').forEach(textarea => {
         textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + 'px';
     });
+}
+
+function calculateBilling() {
+    const hours = parseFloat(document.getElementById('billHours').value) || 0;
+    const rate = parseFloat(document.getElementById('billRate').value) || 0;
+    const spares = parseFloat(document.getElementById('billSpares').value) || 0;
+    const transport = parseFloat(document.getElementById('billTransport').value) || 0;
+    const other = parseFloat(document.getElementById('billOther').value) || 0;
+
+    const serviceTotal = hours * rate;
+    document.getElementById('totalServiceRow').value = serviceTotal.toFixed(2);
+
+    const overallTotal = serviceTotal + spares + transport + other;
+    document.getElementById('billTotalAmount').value = overallTotal.toFixed(2);
 }
 
 function saveFormState() {
@@ -432,6 +503,7 @@ function loadFormState() {
     if (!saved) {
         document.getElementById("reportDate").valueAsDate = new Date();
         autoResizeTextareas();
+        calculateBilling();
         return;
     }
     const state = JSON.parse(saved);
@@ -457,7 +529,7 @@ function loadFormState() {
     if (state['customerSigData']) loadSignatureData('customerSig', state['customerSigData']);
     if (state['engineerSigData']) loadSignatureData('engineerSig', state['engineerSigData']);
     
-    // Resize after data population completes
+    calculateBilling();
     setTimeout(autoResizeTextareas, 50);
 }
 
@@ -479,6 +551,7 @@ function clearAllForm() {
 document.addEventListener('input', e => { 
     if(e.target.matches('.save-state, #sparePartsBody input')) saveFormState(); 
     if(e.target.matches('textarea.auto-resize')) autoResizeTextareas();
+    if(e.target.matches('.bill-calc')) calculateBilling();
 });
 document.addEventListener('change', e => { if(e.target.matches('.save-state')) saveFormState(); });
 
@@ -500,8 +573,8 @@ function prepareAndPrint() {
     if (custRecText !== "") { secCust.classList.add("has-content"); } else { secCust.classList.remove("has-content"); }
     if (sparesCount > 0) { secSpares.classList.add("has-content"); } else { secSpares.classList.remove("has-content"); }
 
-    // Double check sizing calculations right before sending to print context
     autoResizeTextareas();
+    calculateBilling();
 
     const targetFileName = `${custName} _ ${model} _ ${serial} _ ${reportNo}`;
     
