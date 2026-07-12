@@ -95,8 +95,10 @@ input,textarea,select{
 }
 
 textarea{
-    resize:vertical;
+    resize:none; /* Disabled manual resize handle since it auto-grows */
+    overflow:hidden; /* Removes unnecessary scrollbars */
     min-height:60px;
+    display: block;
 }
 
 .details-grid {
@@ -224,6 +226,10 @@ button.btn-secondary:hover {
         print-color-adjust: exact;
     }
     
+    textarea {
+        min-height: auto;
+    }
+    
     /* Ensures background logo graphics show clearly if printing to physical paper */
     img {
         -webkit-print-color-adjust: exact;
@@ -284,10 +290,10 @@ button.btn-secondary:hover {
     <td width="30%"><input id="machineModel" class="save-state" placeholder="Enter Model"></td>
 </tr>
 <tr>
-    <td>Serial No</td>
-    <td><input id="serialNo" class="save-state" placeholder="Enter Serial No"></td>
     <td>Controller</td>
     <td><input id="controller" class="save-state" placeholder="Enter Controller"></td>
+    <td>Serial No</td>
+    <td><input id="serialNo" class="save-state" placeholder="Enter Serial No"></td>
 </tr>
 <tr>
     <td>Customer Machine No</td>
@@ -299,21 +305,21 @@ button.btn-secondary:hover {
     <div class="details-block">
         <div class="details-title">Complaint Details</div>
         <div class="details-content">
-            <textarea id="complaintDetails" class="save-state" placeholder="Enter details here..."></textarea>
+            <textarea id="complaintDetails" class="save-state auto-resize" placeholder="Enter details here..."></textarea>
         </div>
     </div>
 
     <div class="details-block">
         <div class="details-title">Root Cause</div>
         <div class="details-content">
-            <textarea id="rootCause" class="save-state" placeholder="Enter details here..."></textarea>
+            <textarea id="rootCause" class="save-state auto-resize" placeholder="Enter details here..."></textarea>
         </div>
     </div>
 
     <div class="details-block">
         <div class="details-title">Action Taken</div>
         <div class="details-content">
-            <textarea id="actionTaken" class="save-state" placeholder="Enter details here..."></textarea>
+            <textarea id="actionTaken" class="save-state auto-resize" placeholder="Enter details here..."></textarea>
         </div>
     </div>
 </div>
@@ -341,7 +347,7 @@ button.btn-secondary:hover {
     <td>
         <select id="machineStatus" class="save-state">
             <option>Running OK</option>
-            <option>Observation</option>
+            <option>Under Observation</option>
             <option>Pending</option>
             <option>Waiting for Spare</option>
         </select>
@@ -353,14 +359,14 @@ button.btn-secondary:hover {
 <div id="sectionEngRemarks" class="printable-section">
     <h3>Engineer Remarks</h3>
     <div class="notes-box">
-        <textarea id="engRemarks" class="save-state" placeholder="Leave blank to hide in PDF output..."></textarea>
+        <textarea id="engRemarks" class="save-state auto-resize" placeholder="Leave blank to hide in PDF output..."></textarea>
     </div>
 </div>
 
 <div id="sectionCustRec" class="printable-section">
     <h3>Customer Recommendation</h3>
     <div class="notes-box">
-        <textarea id="custRecommendation" class="save-state" placeholder="Leave blank to hide in PDF output..."></textarea>
+        <textarea id="custRecommendation" class="save-state auto-resize" placeholder="Leave blank to hide in PDF output..."></textarea>
     </div>
 </div>
 
@@ -392,6 +398,14 @@ button.btn-secondary:hover {
 </div>
 
 <script>
+// Auto-resize logic for textareas based on typed content length
+function autoResizeTextareas() {
+    document.querySelectorAll('textarea.auto-resize').forEach(textarea => {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    });
+}
+
 function saveFormState() {
     const state = {};
     document.querySelectorAll('.save-state').forEach(el => {
@@ -417,6 +431,7 @@ function loadFormState() {
     const saved = localStorage.getItem('cnc_report_backup');
     if (!saved) {
         document.getElementById("reportDate").valueAsDate = new Date();
+        autoResizeTextareas();
         return;
     }
     const state = JSON.parse(saved);
@@ -441,6 +456,9 @@ function loadFormState() {
 
     if (state['customerSigData']) loadSignatureData('customerSig', state['customerSigData']);
     if (state['engineerSigData']) loadSignatureData('engineerSig', state['engineerSigData']);
+    
+    // Resize after data population completes
+    setTimeout(autoResizeTextareas, 50);
 }
 
 function loadSignatureData(canvasId, dataUrl) {
@@ -458,7 +476,10 @@ function clearAllForm() {
     }
 }
 
-document.addEventListener('input', e => { if(e.target.matches('.save-state, #sparePartsBody input')) saveFormState(); });
+document.addEventListener('input', e => { 
+    if(e.target.matches('.save-state, #sparePartsBody input')) saveFormState(); 
+    if(e.target.matches('textarea.auto-resize')) autoResizeTextareas();
+});
 document.addEventListener('change', e => { if(e.target.matches('.save-state')) saveFormState(); });
 
 function prepareAndPrint() {
@@ -478,6 +499,9 @@ function prepareAndPrint() {
     if (engRemarksText !== "") { secEng.classList.add("has-content"); } else { secEng.classList.remove("has-content"); }
     if (custRecText !== "") { secCust.classList.add("has-content"); } else { secCust.classList.remove("has-content"); }
     if (sparesCount > 0) { secSpares.classList.add("has-content"); } else { secSpares.classList.remove("has-content"); }
+
+    // Double check sizing calculations right before sending to print context
+    autoResizeTextareas();
 
     const targetFileName = `${custName} _ ${model} _ ${serial} _ ${reportNo}`;
     
