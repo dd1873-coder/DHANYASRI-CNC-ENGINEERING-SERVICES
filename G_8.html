@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breakdown Service Report</title>
+
+<style>
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f2f2f2;
+    margin:20px;
+}
+
+.container{
+    width:900px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    box-shadow:0 0 10px gray;
+}
+
+/* Header Layout Styles for Logo and Title Alignment */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px double #003366;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.logo-box {
+    width: 150px;
+    height: auto;
+}
+
+.logo-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.title-box {
+    flex-grow: 1;
+    text-align: center;
+    padding-right: 20px; /* Balances out layout due to logo on left */
+}
+
+.title-box h1 {
+    color:#003366;
+    margin: 0 0 5px 0;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.title-box h2 {
+    color: #444;
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+h3{
+    color:#003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:15px;
+}
+
+table td, table th{
+    border:1px solid #000;
+    padding:8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f9f9f9;
+}
+
+input,textarea,select{
+    width:100%;
+    border:none;
+    outline:none;
+    font-size:14px;
+    background: transparent;
+}
+
+textarea{
+    resize:vertical;
+    min-height:60px;
+}
+
+.details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.details-block {
+    border: 1px solid #000;
+}
+
+.details-title {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    padding: 8px;
+    border-bottom: 1px solid #000;
+    color: #003366;
+}
+
+.details-content {
+    padding: 8px;
+}
+
+.notes-box {
+    border: 1px solid #000;
+    padding: 8px;
+    background: #fff;
+}
+
+.btn-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+button{
+    background:#003366;
+    color:#fff;
+    padding:12px 20px;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0066cc;
+}
+
+button.btn-danger {
+    background: #cc0000;
+    padding: 5px 10px;
+}
+button.btn-danger:hover {
+    background: #ff3333;
+}
+
+button.btn-secondary {
+    background: #555;
+}
+button.btn-secondary:hover {
+    background: #777;
+}
+
+.sig-container {
+    text-align: center;
+}
+.sig-canvas {
+    border: 1px dashed #999;
+    background: #fafafa;
+    cursor: crosshair;
+    display: block;
+    margin: 0 auto 5px auto;
+}
+.btn-clear {
+    background: #666;
+    padding: 4px 10px;
+    font-size: 12px;
+}
+.btn-clear:hover {
+    background: #444;
+}
+
+@media print{
+    @page {
+        margin: 0.5cm;
+    }
+    
+    button, .no-print, .btn-clear {
+        display:none !important;
+    }
+    body{
+        background:white;
+        margin:0;
+    }
+    .container{
+        box-shadow:none;
+        width:100%;
+        padding:0;
+    }
+    .sig-canvas {
+        border: none;
+        background: transparent;
+    }
+    #sparePartsTable:has(#sparePartsBody:empty) {
+        display: none !important;
+    }
+    #sparePartsTable:has(#sparePartsBody:empty) + button {
+        display: none !important;
+    }
+    .spare-section:has(#sparePartsBody:empty) {
+        display: none !important;
+    }
+    
+    .printable-section {
+        display: none;
+    }
+    .printable-section.has-content {
+        display: block !important;
+    }
+    
+    .details-title {
+        background-color: #e6e6e6 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    /* Ensures background logo graphics show clearly if printing to physical paper */
+    img {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Brand Header Layout featuring Logo Box -->
+<div class="header-container">
+    <div class="logo-box">
+        <!-- Make sure to keep your image file named 'logo_b.png' in the identical folder -->
+        <img src="logo_b.png" alt="DHANANSRI CNC logo" onerror="this.style.display='none';">
+    </div>
+    <div class="title-box">
+        <h1>DHANYASRI CNC MACHINE SERVICES</h1>
+        <h2>BREAKDOWN SERVICE REPORT</h2>
+    </div>
+</div>
+
+<table>
+<tr>
+    <td width="15%">Report No</td>
+    <td width="35%"><input id="reportNo" class="save-state" placeholder="Enter Report Number"></td>
+    <td width="15%">Date</td>
+    <td width="35%"><input type="date" id="reportDate" class="save-state"></td>
+</tr>
+<tr>
+    <td>Customer Name</td>
+    <td><input id="customerName" class="save-state" placeholder="Enter Customer Name"></td>
+    <td>Start Time</td>
+    <td><input type="time" id="startTime" class="save-state"></td>
+</tr>
+<tr>
+    <td>Contact Person</td>
+    <td><input id="contactPerson" class="save-state" placeholder="Enter Contact Person"></td>
+    <td>End Time</td>
+    <td><input type="time" id="endTime" class="save-state"></td>
+</tr>
+<tr>
+    <td>Phone</td>
+    <td colspan="3"><input id="phone" class="save-state" placeholder="Enter Phone Number"></td>
+</tr>
+</table>
+
+<h3>Machine Details</h3>
+<table>
+<tr>
+    <td width="20%">Machine Name</td>
+    <td width="30%"><input id="machineName" class="save-state" placeholder="Enter Machine Name"></td>
+    <td width="20%">Model</td>
+    <td width="30%"><input id="machineModel" class="save-state" placeholder="Enter Model"></td>
+</tr>
+<tr>
+    <td>Serial No</td>
+    <td><input id="serialNo" class="save-state" placeholder="Enter Serial No"></td>
+    <td>Controller</td>
+    <td><input id="controller" class="save-state" placeholder="Enter Controller"></td>
+</tr>
+<tr>
+    <td>Customer Machine No</td>
+    <td colspan="3"><input id="custMachineNo" class="save-state" placeholder="Enter Customer Machine Number"></td>
+</tr>
+</table>
+
+<div class="details-grid">
+    <div class="details-block">
+        <div class="details-title">Complaint Details</div>
+        <div class="details-content">
+            <textarea id="complaintDetails" class="save-state" placeholder="Enter details here..."></textarea>
+        </div>
+    </div>
+
+    <div class="details-block">
+        <div class="details-title">Root Cause</div>
+        <div class="details-content">
+            <textarea id="rootCause" class="save-state" placeholder="Enter details here..."></textarea>
+        </div>
+    </div>
+
+    <div class="details-block">
+        <div class="details-title">Action Taken</div>
+        <div class="details-content">
+            <textarea id="actionTaken" class="save-state" placeholder="Enter details here..."></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="printable-section spare-section">
+    <h3>Spare Parts Replaced</h3>
+    <table id="sparePartsTable">
+        <thead>
+            <tr>
+                <th width="70%">Part Name</th>
+                <th width="20%">Quantity</th>
+                <th width="10%" class="no-print">Action</th>
+            </tr>
+        </thead>
+        <tbody id="sparePartsBody">
+            <!-- Dynamic rows inject here -->
+        </tbody>
+    </table>
+</div>
+<button type="button" class="no-print" style="margin-bottom: 15px;" onclick="addSpareRow()">+ Add Spare Part</button>
+
+<h3>Machine Status</h3>
+<table>
+<tr>
+    <td>
+        <select id="machineStatus" class="save-state">
+            <option>Running OK</option>
+            <option>Observation</option>
+            <option>Pending</option>
+            <option>Waiting for Spare</option>
+        </select>
+    </td>
+</tr>
+</table>
+
+<!-- Fixed Display printable sections -->
+<div id="sectionEngRemarks" class="printable-section">
+    <h3>Engineer Remarks</h3>
+    <div class="notes-box">
+        <textarea id="engRemarks" class="save-state" placeholder="Leave blank to hide in PDF output..."></textarea>
+    </div>
+</div>
+
+<div id="sectionCustRec" class="printable-section">
+    <h3>Customer Recommendation</h3>
+    <div class="notes-box">
+        <textarea id="custRecommendation" class="save-state" placeholder="Leave blank to hide in PDF output..."></textarea>
+    </div>
+</div>
+
+<!-- Signatures Section -->
+<table style="margin-top: 40px; border: none;">
+<tr>
+    <td style="width:50%; text-align:center; border:none; vertical-align:top;">
+        <div class="sig-container">
+            <canvas id="customerSig" class="sig-canvas" width="350" height="120"></canvas>
+            <button type="button" class="btn-clear" onclick="clearSignature('customerSig')">Clear</button>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 10px auto 0 auto; padding-top: 5px;">Customer Signature</div>
+        </div>
+    </td>
+    <td style="width:50%; text-align:center; border:none; vertical-align:top;">
+        <div class="sig-container">
+            <canvas id="engineerSig" class="sig-canvas" width="350" height="120"></canvas>
+            <button type="button" class="btn-clear" onclick="clearSignature('engineerSig')">Clear</button>
+            <div style="border-top: 1px solid #000; width: 80%; margin: 10px auto 0 auto; padding-top: 5px;">Engineer Signature</div>
+        </div>
+    </td>
+</tr>
+</table>
+
+<div class="btn-container">
+    <button onclick="prepareAndPrint()">Download PDF / Print</button>
+    <button class="btn-secondary no-print" onclick="clearAllForm()">Reset Form</button>
+</div>
+
+</div>
+
+<script>
+function saveFormState() {
+    const state = {};
+    document.querySelectorAll('.save-state').forEach(el => {
+        state[el.id] = el.value;
+    });
+
+    const spares = [];
+    document.querySelectorAll('#sparePartsBody tr').forEach(row => {
+        const inputs = row.querySelectorAll('input');
+        if(inputs.length >= 2) {
+            spares.push({ name: inputs[0].value, qty: inputs[1].value });
+        }
+    });
+    state['sparesData'] = spares;
+
+    state['customerSigData'] = document.getElementById('customerSig').toDataURL();
+    state['engineerSigData'] = document.getElementById('engineerSig').toDataURL();
+
+    localStorage.setItem('cnc_report_backup', JSON.stringify(state));
+}
+
+function loadFormState() {
+    const saved = localStorage.getItem('cnc_report_backup');
+    if (!saved) {
+        document.getElementById("reportDate").valueAsDate = new Date();
+        return;
+    }
+    const state = JSON.parse(saved);
+
+    document.querySelectorAll('.save-state').forEach(el => {
+        if (state[el.id] !== undefined) el.value = state[el.id];
+    });
+
+    if (state['sparesData']) {
+        const tbody = document.getElementById("sparePartsBody");
+        tbody.innerHTML = '';
+        state['sparesData'].forEach(item => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><input placeholder="Enter part name" value="${item.name}"></td>
+                <td><input type="number" min="1" placeholder="Qty" value="${item.qty}"></td>
+                <td class="no-print"><button type="button" class="btn-danger" onclick="removeSpareRow(this)">Remove</button></td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    if (state['customerSigData']) loadSignatureData('customerSig', state['customerSigData']);
+    if (state['engineerSigData']) loadSignatureData('engineerSig', state['engineerSigData']);
+}
+
+function loadSignatureData(canvasId, dataUrl) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = function() { ctx.drawImage(img, 0, 0); };
+    img.src = dataUrl;
+}
+
+function clearAllForm() {
+    if(confirm("Are you sure you want to clear the entire form data?")) {
+        localStorage.removeItem('cnc_report_backup');
+        location.reload();
+    }
+}
+
+document.addEventListener('input', e => { if(e.target.matches('.save-state, #sparePartsBody input')) saveFormState(); });
+document.addEventListener('change', e => { if(e.target.matches('.save-state')) saveFormState(); });
+
+function prepareAndPrint() {
+    const reportNo = document.getElementById("reportNo").value.trim() || "BD-Report";
+    const custName = document.getElementById("customerName").value.trim() || "Unknown Customer";
+    const model = document.getElementById("machineModel").value.trim() || "Model Unknown";
+    const serial = document.getElementById("serialNo").value.trim() || "Serial Unknown";
+
+    const engRemarksText = document.getElementById("engRemarks").value.trim();
+    const custRecText = document.getElementById("custRecommendation").value.trim();
+    const sparesCount = document.querySelectorAll("#sparePartsBody tr").length;
+
+    const secEng = document.getElementById("sectionEngRemarks");
+    const secCust = document.getElementById("sectionCustRec");
+    const secSpares = document.querySelector(".spare-section");
+
+    if (engRemarksText !== "") { secEng.classList.add("has-content"); } else { secEng.classList.remove("has-content"); }
+    if (custRecText !== "") { secCust.classList.add("has-content"); } else { secCust.classList.remove("has-content"); }
+    if (sparesCount > 0) { secSpares.classList.add("has-content"); } else { secSpares.classList.remove("has-content"); }
+
+    const targetFileName = `${custName} _ ${model} _ ${serial} _ ${reportNo}`;
+    
+    const originalTitle = document.title;
+    document.title = targetFileName;
+    window.print();
+    document.title = originalTitle;
+}
+
+function addSpareRow() {
+    const tbody = document.getElementById("sparePartsBody");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td><input placeholder="Enter part name"></td>
+        <td><input type="number" min="1" placeholder="Qty"></td>
+        <td class="no-print"><button type="button" class="btn-danger" onclick="removeSpareRow(this)">Remove</button></td>
+    `;
+    tbody.appendChild(row);
+    saveFormState();
+}
+
+function removeSpareRow(button) {
+    button.parentElement.parentElement.remove();
+    saveFormState();
+}
+
+function setupSignaturePad(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+
+    function getMousePos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDrawing(e) {
+        drawing = true;
+        const pos = getMousePos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        e.preventDefault();
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        const pos = getMousePos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        e.preventDefault();
+    }
+
+    function stopDrawing() {
+        if(drawing) {
+            drawing = false;
+            saveFormState();
+        }
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    window.addEventListener('mouseup', stopDrawing);
+
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    window.addEventListener('touchend', stopDrawing);
+}
+
+function clearSignature(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    saveFormState();
+}
+
+setupSignaturePad('customerSig');
+setupSignaturePad('engineerSig');
+window.onload = loadFormState;
+</script>
+
+</body>
+</html>
