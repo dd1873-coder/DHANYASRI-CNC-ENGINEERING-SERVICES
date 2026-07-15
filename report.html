@@ -198,7 +198,7 @@ button.btn-secondary:hover {
     background: #444;
 }
 
-.total-row {
+.err{border:2px solid red!important;background:#fff3f3}.total-row {
     font-weight: bold;
     background-color: #f2f2f2;
 }
@@ -241,7 +241,7 @@ button.btn-secondary:hover {
         display: block !important;
     }
     
-    .details-title, .total-row {
+    .details-title, .err{border:2px solid red!important;background:#fff3f3}.total-row {
         background-color: #e6e6e6 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -549,35 +549,23 @@ document.addEventListener('input', e => {
 });
 document.addEventListener('change', e => { if(e.target.matches('.save-state')) saveFormState(); });
 
+
+function isCanvasBlank(id){const c=document.getElementById(id),x=c.getContext('2d');const d=x.getImageData(0,0,c.width,c.height).data;for(let i=3;i<d.length;i+=4){if(d[i])return false;}return true;}
 function prepareAndPrint() {
-    const reportNo = document.getElementById("reportNo").value.trim() || "BD-Report";
-    const custName = document.getElementById("customerName").value.trim() || "Unknown Customer";
-    const model = document.getElementById("machineModel").value.trim() || "Model Unknown";
-    const serial = document.getElementById("serialNo").value.trim() || "Serial Unknown";
-
-    const engRemarksText = document.getElementById("engRemarks").value.trim();
-    const custRecText = document.getElementById("custRecommendation").value.trim();
-    const sparesCount = document.querySelectorAll("#sparePartsBody tr").length;
-
-    const secEng = document.getElementById("sectionEngRemarks");
-    const secCust = document.getElementById("sectionCustRec");
-    const secSpares = document.querySelector(".spare-section");
-
-    if (engRemarksText !== "") { secEng.classList.add("has-content"); } else { secEng.classList.remove("has-content"); }
-    if (custRecText !== "") { secCust.classList.add("has-content"); } else { secCust.classList.remove("has-content"); }
-    if (sparesCount > 0) { secSpares.classList.add("has-content"); } else { secSpares.classList.remove("has-content"); }
-
-    autoResizeTextareas();
-    calculateBilling();
-
-    const targetFileName = `${custName} _ ${model} _ ${serial} _ ${reportNo}`;
-    
-    const originalTitle = document.title;
-    document.title = targetFileName;
-    window.print();
-    document.title = originalTitle;
+const req=[['reportNo','Report No'],['contactPerson','Contact Person'],['customerName','Customer Name'],['machineName','Machine Name'],['controller','Controller'],['machineModel','Model'],['serialNo','Serial No'],['complaintDetails','Complaint Details'],['rootCause','Root Cause'],['actionTaken','Action Taken'],['billHours','Service Hours Worked']];
+document.querySelectorAll('.err').forEach(e=>e.classList.remove('err'));
+let miss=[],first=null;
+req.forEach(r=>{let e=document.getElementById(r[0]);if(!e.value.trim()){miss.push(r[1]);e.classList.add('err');if(!first)first=e;}});
+if(isCanvasBlank('customerSig')) miss.push('Customer Signature');
+if(isCanvasBlank('engineerSig')) miss.push('Engineer Signature');
+if(miss.length){alert('Fill mandatory fields:\n\n• '+miss.join('\n• '));if(first)first.focus();return;}
+const reportNo=document.getElementById("reportNo").value.trim();
+const custName=document.getElementById("customerName").value.trim();
+const model=document.getElementById("machineModel").value.trim();
+const serial=document.getElementById("serialNo").value.trim();
+document.title=`${custName} _ ${model} _ ${serial} _ ${reportNo}`;
+window.print();
 }
-
 function addSpareRow() {
     const tbody = document.getElementById("sparePartsBody");
     const row = document.createElement("tr");
