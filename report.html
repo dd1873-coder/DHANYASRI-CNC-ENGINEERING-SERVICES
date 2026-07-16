@@ -108,6 +108,7 @@ input,textarea,select{
     outline:none;
     font-size:14px;
     background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 textarea{
@@ -115,6 +116,41 @@ textarea{
     overflow:hidden;
     min-height:60px;
     display: block;
+}
+
+/* Print text styles - hidden by default, shown in print */
+.print-text {
+    display: none;
+}
+
+@media print {
+    .print-text {
+        display: inline-block !important;
+        width: 100%;
+        min-height: 20px;
+        padding: 2px 0;
+        border: none !important;
+        background: transparent !important;
+        color: #000 !important;
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+    
+    .input-field {
+        display: none !important;
+    }
+    
+    td .print-text {
+        display: inline-block !important;
+    }
+    
+    /* Fix for spare parts table in print */
+    #sparePartsBody .print-text {
+        display: inline-block !important;
+        padding: 4px 0;
+    }
 }
 
 .details-grid {
@@ -188,6 +224,9 @@ button.btn-secondary:hover {
     cursor: crosshair;
     display: block;
     margin: 0 auto 5px auto;
+    width: 100%;
+    max-width: 350px;
+    height: 120px;
 }
 .btn-clear {
     background: #666;
@@ -198,7 +237,12 @@ button.btn-secondary:hover {
     background: #444;
 }
 
-.err{border:2px solid red!important;background:#fff3f3}.total-row {
+.err {
+    border: 2px solid red !important;
+    background: #fff3f3 !important;
+}
+
+.total-row {
     font-weight: bold;
     background-color: #f2f2f2;
 }
@@ -241,7 +285,7 @@ button.btn-secondary:hover {
         display: block !important;
     }
     
-    .details-title, .err{border:2px solid red!important;background:#fff3f3}.total-row {
+    .details-title, .total-row {
         background-color: #e6e6e6 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -277,11 +321,17 @@ button.btn-secondary:hover {
         <table>
             <tr>
                 <td width="40%" style="font-weight: bold; background-color: #f9f9f9;">Report No:</td>
-                <td><input id="reportNo" class="save-state" placeholder="Enter No" style="text-align: right;"></td>
+                <td>
+                    <input id="reportNo" class="save-state input-field" placeholder="Enter No" style="text-align: right;">
+                    <span id="reportNoText" class="print-text"></span>
+                </td>
             </tr>
             <tr>
                 <td style="font-weight: bold; background-color: #f9f9f9;">Date:</td>
-                <td><input type="date" id="reportDate" class="save-state" style="text-align: right;"></td>
+                <td>
+                    <input type="date" id="reportDate" class="save-state input-field" style="text-align: right;">
+                    <span id="reportDateText" class="print-text"></span>
+                </td>
             </tr>
         </table>
     </div>
@@ -290,19 +340,34 @@ button.btn-secondary:hover {
 <table>
 <tr>
     <td width="20%">Customer Name M/S</td>
-    <td width="40%"><input id="customerName" class="save-state" placeholder="Enter Customer Name"></td>
+    <td width="40%">
+        <input id="customerName" class="save-state input-field" placeholder="Enter Customer Name">
+        <span id="customerNameText" class="print-text"></span>
+    </td>
     <td width="15%">Start Time</td>
-    <td width="25%"><input type="time" id="startTime" class="save-state"></td>
+    <td width="25%">
+        <input type="time" id="startTime" class="save-state input-field">
+        <span id="startTimeText" class="print-text"></span>
+    </td>
 </tr>
 <tr>
     <td>Contact Person</td>
-    <td><input id="contactPerson" class="save-state" placeholder="Enter Contact Person"></td>
+    <td>
+        <input id="contactPerson" class="save-state input-field" placeholder="Enter Contact Person">
+        <span id="contactPersonText" class="print-text"></span>
+    </td>
     <td>End Time</td>
-    <td><input type="time" id="endTime" class="save-state"></td>
+    <td>
+        <input type="time" id="endTime" class="save-state input-field">
+        <span id="endTimeText" class="print-text"></span>
+    </td>
 </tr>
 <tr>
     <td>Phone</td>
-    <td colspan="3"><input id="phone" class="save-state" placeholder="Enter Phone Number"></td>
+    <td colspan="3">
+        <input id="phone" class="save-state input-field" placeholder="Enter Phone Number">
+        <span id="phoneText" class="print-text"></span>
+    </td>
 </tr>
 </table>
 
@@ -310,25 +375,41 @@ button.btn-secondary:hover {
 <table>
 <tr>
     <td width="20%">Machine Name</td>
-    <td width="30%"><input id="machineName" class="save-state" placeholder="Enter Machine Name"></td>
+    <td width="30%">
+        <input id="machineName" class="save-state input-field" placeholder="Enter Machine Name">
+        <span id="machineNameText" class="print-text"></span>
+    </td>
     <td width="20%">Model</td>
-    <td width="30%"><input id="machineModel" class="save-state" placeholder="Enter Model"></td>
+    <td width="30%">
+        <input id="machineModel" class="save-state input-field" placeholder="Enter Model">
+        <span id="machineModelText" class="print-text"></span>
+    </td>
 </tr>
 <tr>
     <td>Controller</td>
-    <td><input id="controller" class="save-state" placeholder="Enter Controller"></td>
+    <td>
+        <input id="controller" class="save-state input-field" placeholder="Enter Controller">
+        <span id="controllerText" class="print-text"></span>
+    </td>
     <td>Serial No</td>
-    <td><input id="serialNo" class="save-state" placeholder="Enter Serial No"></td>
+    <td>
+        <input id="serialNo" class="save-state input-field" placeholder="Enter Serial No">
+        <span id="serialNoText" class="print-text"></span>
+    </td>
 </tr>
 <tr>
     <td>Customer Machine No</td>
-    <td><input id="custMachineNo" class="save-state" placeholder="Enter Customer Machine Number"></td>
+    <td>
+        <input id="custMachineNo" class="save-state input-field" placeholder="Enter Customer Machine Number">
+        <span id="custMachineNoText" class="print-text"></span>
+    </td>
     <td>Service Type</td>
     <td>
-        <select id="serviceType" class="save-state">
+        <select id="serviceType" class="save-state input-field">
             <option>OW</option>
             <option>AMC</option>
         </select>
+        <span id="serviceTypeText" class="print-text"></span>
     </td>
 </tr>
 </table>
@@ -337,21 +418,24 @@ button.btn-secondary:hover {
     <div class="details-block">
         <div class="details-title">Complaint Details</div>
         <div class="details-content">
-            <textarea id="complaintDetails" class="save-state auto-resize" placeholder="Enter details here..."></textarea>
+            <textarea id="complaintDetails" class="save-state auto-resize input-field" placeholder="Enter details here..."></textarea>
+            <div id="complaintDetailsText" class="print-text"></div>
         </div>
     </div>
 
     <div class="details-block">
         <div class="details-title">Root Cause</div>
         <div class="details-content">
-            <textarea id="rootCause" class="save-state auto-resize" placeholder="Enter details here..."></textarea>
+            <textarea id="rootCause" class="save-state auto-resize input-field" placeholder="Enter details here..."></textarea>
+            <div id="rootCauseText" class="print-text"></div>
         </div>
     </div>
 
     <div class="details-block">
         <div class="details-title">Action Taken</div>
         <div class="details-content">
-            <textarea id="actionTaken" class="save-state auto-resize" placeholder="Enter details here..."></textarea>
+            <textarea id="actionTaken" class="save-state auto-resize input-field" placeholder="Enter details here..."></textarea>
+            <div id="actionTakenText" class="print-text"></div>
         </div>
     </div>
 </div>
@@ -377,23 +461,41 @@ button.btn-secondary:hover {
 <table>
 <tr>
     <td width="25%">Service Hours</td>
-    <td width="25%"><input type="text" id="billHours" class="save-state" placeholder="Enter hours (e.g., 4 hrs)"></td>
+    <td width="25%">
+        <input type="text" id="billHours" class="save-state input-field" placeholder="Enter hours (e.g., 4 hrs)">
+        <span id="billHoursText" class="print-text"></span>
+    </td>
     <td width="25%">Total Service Charges</td>
-    <td width="25%"><input type="number" id="totalServiceRow" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td width="25%">
+        <input type="number" id="totalServiceRow" class="save-state bill-calc input-field" placeholder="0.00" min="0">
+        <span id="totalServiceRowText" class="print-text"></span>
+    </td>
 </tr>
 <tr>
     <td>Spare Parts Cost Total</td>
-    <td><input type="number" id="billSpares" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td>
+        <input type="number" id="billSpares" class="save-state bill-calc input-field" placeholder="0.00" min="0">
+        <span id="billSparesText" class="print-text"></span>
+    </td>
     <td>Transport / Conveyance</td>
-    <td><input type="number" id="billTransport" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td>
+        <input type="number" id="billTransport" class="save-state bill-calc input-field" placeholder="0.00" min="0">
+        <span id="billTransportText" class="print-text"></span>
+    </td>
 </tr>
 <tr>
     <td>Other Incidental Costs</td>
-    <td colspan="3"><input type="number" id="billOther" class="save-state bill-calc" placeholder="0.00" min="0"></td>
+    <td colspan="3">
+        <input type="number" id="billOther" class="save-state bill-calc input-field" placeholder="0.00" min="0">
+        <span id="billOtherText" class="print-text"></span>
+    </td>
 </tr>
 <tr class="total-row">
     <td colspan="3" style="text-align: right; font-size: 16px;">Total Amount Due:</td>
-    <td><input type="number" id="billTotalAmount" placeholder="0.00" readonly style="font-weight: bold; font-size: 16px; color: #003366;"></td>
+    <td>
+        <input type="number" id="billTotalAmount" placeholder="0.00" readonly style="font-weight: bold; font-size: 16px; color: #003366;" class="input-field">
+        <span id="billTotalAmountText" class="print-text" style="font-weight: bold; font-size: 16px; color: #003366;"></span>
+    </td>
 </tr>
 </table>
 
@@ -401,12 +503,13 @@ button.btn-secondary:hover {
 <table>
 <tr>
     <td>
-        <select id="machineStatus" class="save-state">
+        <select id="machineStatus" class="save-state input-field">
             <option>Running OK</option>
             <option>Under Observation</option>
             <option>Pending</option>
             <option>Waiting for Spare</option>
         </select>
+        <span id="machineStatusText" class="print-text"></span>
     </td>
 </tr>
 </table>
@@ -415,14 +518,16 @@ button.btn-secondary:hover {
 <div id="sectionEngRemarks" class="printable-section">
     <h3>Engineer Remarks</h3>
     <div class="notes-box">
-        <textarea id="engRemarks" class="save-state auto-resize" placeholder="Leave blank to hide in PDF output..."></textarea>
+        <textarea id="engRemarks" class="save-state auto-resize input-field" placeholder="Leave blank to hide in PDF output..."></textarea>
+        <div id="engRemarksText" class="print-text"></div>
     </div>
 </div>
 
 <div id="sectionCustRec" class="printable-section">
     <h3>Customer Recommendation</h3>
     <div class="notes-box">
-        <textarea id="custRecommendation" class="save-state auto-resize" placeholder="Leave blank to hide in PDF output..."></textarea>
+        <textarea id="custRecommendation" class="save-state auto-resize input-field" placeholder="Leave blank to hide in PDF output..."></textarea>
+        <div id="custRecommendationText" class="print-text"></div>
     </div>
 </div>
 
@@ -432,14 +537,14 @@ button.btn-secondary:hover {
     <td style="width:50%; text-align:center; border:none; vertical-align:top;">
         <div class="sig-container">
             <canvas id="customerSig" class="sig-canvas" width="350" height="120"></canvas>
-            <button type="button" class="btn-clear" onclick="clearSignature('customerSig')">Clear</button>
+            <button type="button" class="btn-clear no-print" onclick="clearSignature('customerSig')">Clear</button>
             <div style="border-top: 1px solid #000; width: 80%; margin: 10px auto 0 auto; padding-top: 5px;">Customer Signature</div>
         </div>
     </td>
     <td style="width:50%; text-align:center; border:none; vertical-align:top;">
         <div class="sig-container">
             <canvas id="engineerSig" class="sig-canvas" width="350" height="120"></canvas>
-            <button type="button" class="btn-clear" onclick="clearSignature('engineerSig')">Clear</button>
+            <button type="button" class="btn-clear no-print" onclick="clearSignature('engineerSig')">Clear</button>
             <div style="border-top: 1px solid #000; width: 80%; margin: 10px auto 0 auto; padding-top: 5px;">Engineer Signature</div>
         </div>
     </td>
@@ -454,6 +559,39 @@ button.btn-secondary:hover {
 </div>
 
 <script>
+// Signature tracking states
+let customerSigSigned = false;
+let engineerSigSigned = false;
+
+// Function to update print text versions
+function updatePrintText() {
+    const fields = [
+        'reportNo', 'reportDate', 'customerName', 'startTime', 'contactPerson', 
+        'endTime', 'phone', 'machineName', 'machineModel', 'controller', 'serialNo',
+        'custMachineNo', 'serviceType', 'complaintDetails', 'rootCause', 'actionTaken',
+        'billHours', 'totalServiceRow', 'billSpares', 'billTransport', 'billOther',
+        'billTotalAmount', 'machineStatus', 'engRemarks', 'custRecommendation'
+    ];
+    
+    fields.forEach(id => {
+        const input = document.getElementById(id);
+        const textSpan = document.getElementById(id + 'Text');
+        if (input && textSpan) {
+            let value = input.value;
+            if (id === 'serviceType' && input.tagName === 'SELECT') {
+                value = input.options[input.selectedIndex].text;
+            } else if (id === 'reportDate' && value) {
+                // Format date nicely
+                const date = new Date(value + 'T00:00:00');
+                if (!isNaN(date.getTime())) {
+                    value = date.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                }
+            }
+            textSpan.textContent = value || '';
+        }
+    });
+}
+
 function autoResizeTextareas() {
     document.querySelectorAll('textarea.auto-resize').forEach(textarea => {
         textarea.style.height = 'auto';
@@ -469,6 +607,7 @@ function calculateBilling() {
 
     const overallTotal = serviceTotal + spares + transport + other;
     document.getElementById('billTotalAmount').value = overallTotal.toFixed(2);
+    updatePrintText();
 }
 
 function saveFormState() {
@@ -488,8 +627,11 @@ function saveFormState() {
 
     state['customerSigData'] = document.getElementById('customerSig').toDataURL();
     state['engineerSigData'] = document.getElementById('engineerSig').toDataURL();
+    state['customerSigSigned'] = customerSigSigned;
+    state['engineerSigSigned'] = engineerSigSigned;
 
     localStorage.setItem('cnc_report_backup', JSON.stringify(state));
+    updatePrintText();
 }
 
 function loadFormState() {
@@ -498,6 +640,7 @@ function loadFormState() {
         document.getElementById("reportDate").valueAsDate = new Date();
         autoResizeTextareas();
         calculateBilling();
+        updatePrintText();
         return;
     }
     const state = JSON.parse(saved);
@@ -512,19 +655,31 @@ function loadFormState() {
         state['sparesData'].forEach(item => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td><input placeholder="Enter part name" value="${item.name}"></td>
-                <td><input type="number" min="1" placeholder="Qty" value="${item.qty}"></td>
+                <td>
+                    <input placeholder="Enter part name" value="${item.name}" class="input-field">
+                    <span class="print-text">${item.name}</span>
+                </td>
+                <td>
+                    <input type="number" min="1" placeholder="Qty" value="${item.qty}" class="input-field">
+                    <span class="print-text">${item.qty}</span>
+                </td>
                 <td class="no-print"><button type="button" class="btn-danger" onclick="removeSpareRow(this)">Remove</button></td>
             `;
             tbody.appendChild(row);
         });
     }
 
-    if (state['customerSigData']) loadSignatureData('customerSig', state['customerSigData']);
-    if (state['engineerSigData']) loadSignatureData('engineerSig', state['engineerSigData']);
+    if (state['customerSigSigned'] !== undefined) customerSigSigned = state['customerSigSigned'];
+    if (state['engineerSigSigned'] !== undefined) engineerSigSigned = state['engineerSigSigned'];
+
+    if (state['customerSigData'] && customerSigSigned) loadSignatureData('customerSig', state['customerSigData']);
+    if (state['engineerSigData'] && engineerSigSigned) loadSignatureData('engineerSig', state['engineerSigData']);
     
     calculateBilling();
-    setTimeout(autoResizeTextareas, 50);
+    setTimeout(() => {
+        autoResizeTextareas();
+        updatePrintText();
+    }, 50);
 }
 
 function loadSignatureData(canvasId, dataUrl) {
@@ -543,44 +698,131 @@ function clearAllForm() {
 }
 
 document.addEventListener('input', e => { 
-    if(e.target.matches('.save-state, #sparePartsBody input')) saveFormState(); 
+    if(e.target.matches('.save-state, #sparePartsBody input')) {
+        saveFormState();
+        updatePrintText();
+    }
     if(e.target.matches('textarea.auto-resize')) autoResizeTextareas();
     if(e.target.matches('.bill-calc')) calculateBilling();
 });
-document.addEventListener('change', e => { if(e.target.matches('.save-state')) saveFormState(); });
+document.addEventListener('change', e => { 
+    if(e.target.matches('.save-state')) {
+        saveFormState();
+        updatePrintText();
+    }
+});
 
-
-function isCanvasBlank(id){const c=document.getElementById(id),x=c.getContext('2d');const d=x.getImageData(0,0,c.width,c.height).data;for(let i=3;i<d.length;i+=4){if(d[i])return false;}return true;}
-function prepareAndPrint() {
-const req=[['reportNo','Report No'],['contactPerson','Contact Person'],['customerName','Customer Name'],['machineName','Machine Name'],['controller','Controller'],['machineModel','Model'],['serialNo','Serial No'],['complaintDetails','Complaint Details'],['rootCause','Root Cause'],['actionTaken','Action Taken'],['billHours','Service Hours Worked']];
-document.querySelectorAll('.err').forEach(e=>e.classList.remove('err'));
-let miss=[],first=null;
-req.forEach(r=>{let e=document.getElementById(r[0]);if(!e.value.trim()){miss.push(r[1]);e.classList.add('err');if(!first)first=e;}});
-if(isCanvasBlank('customerSig')) miss.push('Customer Signature');
-if(isCanvasBlank('engineerSig')) miss.push('Engineer Signature');
-if(miss.length){alert('Fill mandatory fields:\n\n• '+miss.join('\n• '));if(first)first.focus();return;}
-const reportNo=document.getElementById("reportNo").value.trim();
-const custName=document.getElementById("customerName").value.trim();
-const model=document.getElementById("machineModel").value.trim();
-const serial=document.getElementById("serialNo").value.trim();
-document.title=`${custName} _ ${model} _ ${serial} _ ${reportNo}`;
-window.print();
+function isCanvasBlank(id) {
+    const c = document.getElementById(id);
+    const x = c.getContext('2d');
+    const d = x.getImageData(0, 0, c.width, c.height).data;
+    for(let i = 3; i < d.length; i += 4) {
+        if(d[i] > 0) return false;
+    }
+    return true;
 }
+
+function prepareAndPrint() {
+    // Update all print text before printing
+    updatePrintText();
+    
+    // Update spare parts text
+    document.querySelectorAll('#sparePartsBody tr').forEach(row => {
+        const inputs = row.querySelectorAll('input');
+        const textSpans = row.querySelectorAll('.print-text');
+        if (inputs.length >= 2 && textSpans.length >= 2) {
+            textSpans[0].textContent = inputs[0].value || '';
+            textSpans[1].textContent = inputs[1].value || '';
+        }
+    });
+
+    const req = [
+        ['reportNo','Report No'],
+        ['contactPerson','Contact Person'],
+        ['customerName','Customer Name'],
+        ['machineName','Machine Name'],
+        ['controller','Controller'],
+        ['machineModel','Model'],
+        ['serialNo','Serial No'],
+        ['complaintDetails','Complaint Details'],
+        ['rootCause','Root Cause'],
+        ['actionTaken','Action Taken'],
+        ['billHours','Service Hours Worked']
+    ];
+    
+    document.querySelectorAll('.err').forEach(e => e.classList.remove('err'));
+    let miss = [];
+    let first = null;
+    
+    req.forEach(r => {
+        let e = document.getElementById(r[0]);
+        if(!e.value.trim()) {
+            miss.push(r[1]);
+            e.classList.add('err');
+            if(!first) first = e;
+        }
+    });
+    
+    if(!customerSigSigned || isCanvasBlank('customerSig')) {
+        miss.push('Customer Signature');
+        document.getElementById('customerSig').classList.add('err');
+    }
+    if(!engineerSigSigned || isCanvasBlank('engineerSig')) {
+        miss.push('Engineer Signature');
+        document.getElementById('engineerSig').classList.add('err');
+    }
+    
+    if(miss.length) {
+        alert('Please fill in all mandatory fields:\n\n• ' + miss.join('\n• '));
+        if(first) first.focus();
+        return;
+    }
+    
+    const reportNo = document.getElementById("reportNo").value.trim();
+    const custName = document.getElementById("customerName").value.trim();
+    const model = document.getElementById("machineModel").value.trim();
+    const serial = document.getElementById("serialNo").value.trim();
+    
+    // Show/hide printable sections
+    const engRemarksText = document.getElementById("engRemarks").value.trim();
+    const custRecText = document.getElementById("custRecommendation").value.trim();
+    const sparesCount = document.querySelectorAll("#sparePartsBody tr").length;
+
+    const secEng = document.getElementById("sectionEngRemarks");
+    const secCust = document.getElementById("sectionCustRec");
+    const secSpares = document.querySelector(".spare-section");
+
+    if (engRemarksText !== "") { secEng.classList.add("has-content"); } else { secEng.classList.remove("has-content"); }
+    if (custRecText !== "") { secCust.classList.add("has-content"); } else { secCust.classList.remove("has-content"); }
+    if (sparesCount > 0) { secSpares.classList.add("has-content"); } else { secSpares.classList.remove("has-content"); }
+
+    document.title = `${custName} _ ${model} _ ${serial} _ ${reportNo}`;
+    window.print();
+}
+
 function addSpareRow() {
     const tbody = document.getElementById("sparePartsBody");
     const row = document.createElement("tr");
     row.innerHTML = `
-        <td><input placeholder="Enter part name"></td>
-        <td><input type="number" min="1" placeholder="Qty"></td>
+        <td>
+            <input placeholder="Enter part name" class="input-field">
+            <span class="print-text"></span>
+        </td>
+        <td>
+            <input type="number" min="1" placeholder="Qty" class="input-field">
+            <span class="print-text"></span>
+        </td>
         <td class="no-print"><button type="button" class="btn-danger" onclick="removeSpareRow(this)">Remove</button></td>
     `;
     tbody.appendChild(row);
     saveFormState();
+    updatePrintText();
 }
 
 function removeSpareRow(button) {
-    button.parentElement.parentElement.remove();
+    button.closest('tr').remove();
     saveFormState();
+    updatePrintText();
 }
 
 function setupSignaturePad(canvasId) {
@@ -612,6 +854,15 @@ function setupSignaturePad(canvasId) {
         const pos = getMousePos(e);
         ctx.lineTo(pos.x, pos.y);
         ctx.stroke();
+        
+        if (canvasId === 'customerSig') {
+            customerSigSigned = true;
+            canvas.classList.remove('err');
+        } else if (canvasId === 'engineerSig') {
+            engineerSigSigned = true;
+            canvas.classList.remove('err');
+        }
+        
         e.preventDefault();
     }
 
@@ -635,6 +886,13 @@ function clearSignature(canvasId) {
     const canvas = document.getElementById(canvasId);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    if (canvasId === 'customerSig') {
+        customerSigSigned = false;
+    } else if (canvasId === 'engineerSig') {
+        engineerSigSigned = false;
+    }
+    
     saveFormState();
 }
 
