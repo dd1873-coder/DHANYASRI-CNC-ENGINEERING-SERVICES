@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Material List App</title>
+<title>DHANYASRI CNC · Material Checklist</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
 <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/dd1873-coder/DHANYASRI-CNC-ENGINEERING-SERVICES/main/icon.jpeg" />
@@ -12,93 +12,208 @@
 *{box-sizing:border-box}
 body{
     margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:#f1f5f9;
-    color:#0f172a;
+    font-family:'Segoe UI',Roboto,-apple-system,BlinkMacSystemFont,sans-serif;
+    background:linear-gradient(135deg,#e8edf5 0%,#d5dce8 100%);
+    min-height:100vh;
+    padding:20px;
+    color:#0a1922;
 }
+
+/* ---- MODERN PREMIUM QUOTATION STYLE WITH WATERMARK ---- */
 .app{
-    max-width:1100px;
-    margin:24px auto;
-    background:#fff;
-    border-radius:12px;
-    box-shadow:0 4px 20px rgba(15,23,42,0.08);
+    max-width:1150px;
+    margin:0 auto;
+    background:#ffffff;
+    border-radius:24px;
+    box-shadow:0 30px 80px rgba(10,25,34,0.15),0 10px 30px rgba(0,0,0,0.05);
     overflow:hidden;
-    border:1px solid #e2e8f0;
+    border:1px solid rgba(255,255,255,0.3);
     position:relative;
+    backdrop-filter:blur(2px);
 }
+
+/* ---- WATERMARK BACKGROUND ---- */
+.app::before{
+    content: 'DS';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-size: 220px;
+    font-weight: 900;
+    color: rgba(10, 22, 40, 0.04);
+    letter-spacing: 20px;
+    pointer-events: none;
+    z-index: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-shadow: 0 0 40px rgba(10,22,40,0.02);
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* Additional subtle watermark pattern */
+.app::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(232,184,75,0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(232,184,75,0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* All content sits above watermark */
+.topbar, .form-area, .customer-grid, .photo-section, .table-wrap, .btn-row, .bottom-tag{
+    position: relative;
+    z-index: 1;
+}
+
+/* Header – Premium Gradient with Gold */
 .topbar{
-    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    background:linear-gradient(135deg,#0a1628 0%,#1a2a4a 40%,#2a3a5a 100%);
     color:#fff;
-    padding:20px 24px;
+    padding:22px 36px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:15px;
     flex-wrap:wrap;
+    border-bottom:3px solid #e8b84b;
+    position:relative;
+    overflow:hidden;
 }
-.topbar h1{margin:0;font-size:20px;letter-spacing:.5px;font-weight:700}
+.topbar::before{
+    content:'';
+    position:absolute;
+    top:-50%;
+    right:-10%;
+    width:300px;
+    height:300px;
+    background:radial-gradient(circle,rgba(232,184,75,0.08) 0%,transparent 70%);
+    border-radius:50%;
+    z-index:0;
+}
+.topbar h1{
+    margin:0;
+    font-size:22px;
+    letter-spacing:0.5px;
+    font-weight:800;
+    position:relative;
+    z-index:1;
+}
+.topbar h1 i{
+    color:#e8b84b;
+    margin-right:12px;
+    background:rgba(232,184,75,0.15);
+    padding:8px;
+    border-radius:10px;
+    font-size:20px;
+}
 .topbar-right{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:16px;
+    position:relative;
+    z-index:1;
 }
 .report-no-badge{
-    background:rgba(255,255,255,0.15);
-    border:1px solid rgba(255,255,255,0.3);
-    color:#fff;
-    padding:6px 12px;
-    border-radius:6px;
+    background:rgba(232,184,75,0.15);
+    border:1px solid rgba(232,184,75,0.35);
+    color:#e8b84b;
+    padding:6px 20px;
+    border-radius:30px;
     font-size:13px;
     font-weight:700;
     letter-spacing:0.5px;
+    backdrop-filter:blur(4px);
 }
 .badge{
-    background:#22c55e;
-    color:#fff;
-    padding:6px 14px;
+    background:linear-gradient(135deg,#e8b84b,#d4a030);
+    color:#0a1628;
+    padding:6px 20px;
     border-radius:30px;
     font-size:13px;
-    font-weight:600;
+    font-weight:700;
     letter-spacing:0.5px;
+    box-shadow:0 4px 15px rgba(232,184,75,0.3);
 }
+
+/* Form area */
 .form-area{
-    padding:24px;
-    padding-bottom:50px;
+    padding:30px 36px 44px;
+    background:linear-gradient(180deg,#ffffff 0%,#fafcff 100%);
+    position:relative;
+    z-index:1;
 }
+
+/* Customer grid – premium card (6 fields, 3 rows) */
 .customer-grid{
     display:grid;
     grid-template-columns:140px 1fr 140px 1fr;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
+    border:1px solid #e8edf5;
+    border-radius:16px;
     max-width:100%;
-    margin-bottom:24px;
+    margin-bottom:28px;
     overflow:hidden;
-    box-shadow:0 1px 3px rgba(0,0,0,0.02);
+    background:#ffffff;
+    box-shadow:0 4px 20px rgba(10,25,34,0.04);
+    transition:box-shadow 0.3s;
+    position:relative;
+    z-index:1;
+}
+.customer-grid:hover{
+    box-shadow:0 8px 30px rgba(10,25,34,0.08);
 }
 .customer-grid label,
 .customer-grid input,
 .customer-grid select{
-    padding:12px;
+    padding:14px 18px;
     font-size:14px;
     border:none;
+    background:transparent;
 }
 .customer-grid label{
-    font-weight:600;
-    background:#f8fafc;
-    color:#475569;
-    border-right:1px solid #e2e8f0;
-    border-bottom:1px solid #e2e8f0;
+    font-weight:700;
+    background:linear-gradient(135deg,#f8faff,#f0f4fc);
+    color:#1a2a4a;
+    border-right:1px solid #e8edf5;
+    border-bottom:1px solid #e8edf5;
+    font-size:12px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+}
+.customer-grid label i{
+    color:#e8b84b;
+    margin-right:8px;
+    width:16px;
+    text-align:center;
 }
 .customer-grid input,
 .customer-grid select{
     outline:none;
-    background:#fff;
-    color:#0f172a;
-    border-bottom:1px solid #e2e8f0;
+    background:#ffffff;
+    color:#0a1922;
+    border-bottom:1px solid #e8edf5;
+    transition:all 0.3s;
+    font-weight:500;
+}
+.customer-grid input:hover,
+.customer-grid select:hover{
+    background:#fafcff;
+}
+.customer-grid input:focus,
+.customer-grid select:focus{
+    border-color:#e8b84b;
+    box-shadow:inset 0 0 0 2px rgba(232,184,75,0.12);
+    background:#ffffff;
 }
 .customer-grid input:not(:nth-child(4n)),
 .customer-grid select:not(:nth-child(4n)){
-    border-right:1px solid #e2e8f0;
+    border-right:1px solid #e8edf5;
 }
 .customer-grid label:nth-last-child(2),
 .customer-grid select:last-child,
@@ -106,77 +221,151 @@ body{
 .customer-grid input:nth-last-child(3){
     border-bottom:none;
 }
+/* Hide the engineer row (last row) */
+.customer-grid label:nth-child(11),
+.customer-grid select:nth-child(12){
+    display:none;
+}
+/* Adjust last visible row to have no bottom border */
+.customer-grid label:nth-child(9),
+.customer-grid input:nth-child(10){
+    border-bottom:none;
+}
+
+/* Photo section – elegant */
 .photo-section{
-    margin-bottom:24px;
-    padding:20px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    background:#f8fafc;
+    margin-bottom:28px;
+    padding:20px 24px 24px;
+    border:1px solid #e8edf5;
+    border-radius:16px;
+    background:#ffffff;
+    box-shadow:0 4px 20px rgba(10,25,34,0.04);
+    transition:box-shadow 0.3s;
+    position:relative;
+    z-index:1;
+}
+.photo-section:hover{
+    box-shadow:0 8px 30px rgba(10,25,34,0.08);
 }
 .photo-label{
     display:block;
-    font-weight:600;
-    color:#334155;
+    font-weight:700;
+    color:#1a2a4a;
     margin-bottom:12px;
-    font-size:14px;
+    font-size:13px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
 }
-#photoUpload{margin-bottom:14px;font-size:14px}
+.photo-label i{
+    color:#e8b84b;
+    margin-right:10px;
+    background:rgba(232,184,75,0.1);
+    padding:6px;
+    border-radius:8px;
+}
+#photoUpload{
+    margin-bottom:14px;
+    font-size:14px;
+    padding:8px 0;
+    color:#1a2a4a;
+}
+#photoUpload::file-selector-button{
+    padding:8px 20px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#0a1628,#1a2a4a);
+    color:#fff;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+    transition:all 0.3s;
+    margin-right:12px;
+}
+#photoUpload::file-selector-button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(10,25,34,0.2);
+}
 .photo-preview-box{
     min-height:120px;
-    border:2px dashed #cbd5e1;
-    border-radius:8px;
+    border:2px dashed #e8edf5;
+    border-radius:14px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:16px;
-    background:#fff;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;
+    background:#fafcff;
     color:#64748b;
     font-size:13px;
     padding:16px;
+    transition:border-color 0.3s, background 0.3s;
+}
+.photo-preview-box:hover{
+    border-color:#e8b84b;
+    background:#ffffff;
 }
 .photo-preview-box span{
     grid-column:1/-1;
     text-align:center;
-    padding:35px 0;
+    padding:30px 0;
+    color:#94a3b8;
 }
 .photo-item{
     position:relative;
     width:100%;
-    border:1px solid #e2e8f0;
-    border-radius:8px;
-    background:#f8fafc;
+    border:1px solid #e8edf5;
+    border-radius:12px;
+    background:#ffffff;
     padding:6px;
+    transition:box-shadow 0.3s, transform 0.2s;
+}
+.photo-item:hover{
+    box-shadow:0 8px 25px rgba(10,25,34,0.1);
+    transform:scale(1.01);
 }
 .photo-item img{
     width:100%;
-    height:180px;
+    height:170px;
     display:block;
     object-fit:contain;
-    border-radius:6px;
-    background:#fff;
+    border-radius:8px;
+    background:#fafcff;
 }
 .remove-photo{
     position:absolute;
-    top:12px;
-    right:12px;
-    background:#ef4444;
+    top:8px;
+    right:8px;
+    background:linear-gradient(135deg,#b91c1c,#7f1d1d);
     color:white;
     border:none;
     border-radius:50%;
-    width:24px;
-    height:24px;
+    width:26px;
+    height:26px;
     padding:0;
-    font-size:14px;
+    font-size:15px;
     cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
-    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    box-shadow:0 4px 12px rgba(185,28,28,0.3);
+    transition:all 0.2s;
 }
+.remove-photo:hover{
+    transform:scale(1.15);
+    box-shadow:0 6px 20px rgba(185,28,28,0.4);
+}
+
+/* Table – premium clean */
 .table-wrap{
     overflow-x:auto;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    box-shadow:0 1px 3px rgba(0,0,0,0.02);
+    border:1px solid #e8edf5;
+    border-radius:16px;
+    box-shadow:0 4px 20px rgba(10,25,34,0.04);
+    background:#ffffff;
+    transition:box-shadow 0.3s;
+    position:relative;
+    z-index:1;
+}
+.table-wrap:hover{
+    box-shadow:0 8px 30px rgba(10,25,34,0.08);
 }
 table{
     width:100%;
@@ -185,89 +374,195 @@ table{
     background:#fff;
 }
 th,td{
-    border-bottom:1px solid #e2e8f0;
-    border-right:1px solid #e2e8f0;
-    padding:10px 12px;
+    border-bottom:1px solid #eef2f7;
+    border-right:1px solid #eef2f7;
+    padding:12px 16px;
     font-size:14px;
 }
 th:last-child, td:last-child{border-right:none}
 tr:last-child td{border-bottom:none}
 th{
-    background:#1e293b;
+    background:linear-gradient(135deg,#0a1628,#1a2a4a);
     color:#ffffff;
-    font-weight:600;
+    font-weight:700;
     text-align:center;
+    font-size:12px;
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+    padding:14px 16px;
+}
+th i{
+    margin-right:8px;
+    color:#e8b84b;
+}
+tbody tr{
+    transition:background 0.2s;
+}
+tbody tr:hover{
+    background:#f8faff;
 }
 .material-input,
 select{
     width:100%;
-    padding:8px 12px;
-    border:1px solid #cbd5e1;
-    border-radius:6px;
+    padding:9px 16px;
+    border:1px solid #e8edf5;
+    border-radius:10px;
     font-size:14px;
-    background:#fff;
-    color:#0f172a;
+    background:#ffffff;
+    color:#0a1922;
     outline:none;
-    transition:border-color 0.2s;
+    transition:all 0.3s;
+    font-weight:500;
+}
+.material-input:hover,
+select:hover{
+    background:#fafcff;
 }
 .material-input:focus,
 select:focus,
 input:focus{
-    border-color:#2563eb;
-    box-shadow:0 0 0 2px rgba(37,99,235,0.15);
+    border-color:#e8b84b;
+    box-shadow:0 0 0 3px rgba(232,184,75,0.12);
+    background:#ffffff;
 }
+select{
+    cursor:pointer;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    padding-right:36px;
+}
+
+/* Buttons – premium */
 .btn-row{
     display:flex;
-    gap:12px;
-    margin-top:24px;
+    gap:14px;
+    margin-top:30px;
     flex-wrap:wrap;
+    position:relative;
+    z-index:1;
 }
 button{
     border:none;
-    padding:12px 20px;
-    border-radius:6px;
+    padding:12px 26px;
+    border-radius:12px;
     cursor:pointer;
-    font-weight:600;
-    font-size:14px;
+    font-weight:700;
+    font-size:13px;
     color:#fff;
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    transition:background-color 0.2s;
+    gap:10px;
+    transition:all 0.3s;
+    box-shadow:0 4px 15px rgba(0,0,0,0.04);
+    position:relative;
+    overflow:hidden;
 }
-.add-btn{background:#2563eb}
-.add-btn:hover{background:#1d4ed8}
-.download-btn{background:#16a34a}
-.download-btn:hover{background:#15803d}
-.clear-btn{background:#dc2626}
-.clear-btn:hover{background:#b91c1c}
-.delete-btn{
-    background:#ef4444;
-    padding:6px 12px;
-    border-radius:4px;
-}
-.delete-btn:hover{background:#dc2626}
-.bottom-tag{
+button::after{
+    content:'';
     position:absolute;
-    bottom:12px;
-    right:24px;
-    font-size:11px;
-    color:#94a3b8;
-    font-weight:600;
-    letter-spacing:0.8px;
-    text-transform:uppercase;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:linear-gradient(180deg,rgba(255,255,255,0.1) 0%,transparent 100%);
+    pointer-events:none;
+}
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.12);
+}
+button:active{
+    transform:translateY(0px);
+}
+.add-btn{
+    background:linear-gradient(135deg,#0a1628,#1a2a4a);
+}
+.add-btn:hover{background:linear-gradient(135deg,#1a2a4a,#2a3a5a);}
+.download-word-btn{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+.download-word-btn:hover{background:linear-gradient(135deg,#1d4ed8,#1a3a8a);}
+.download-pdf-btn{
+    background:linear-gradient(135deg,#16a34a,#15803d);
+}
+.download-pdf-btn:hover{background:linear-gradient(135deg,#15803d,#0d6b32);}
+.clear-btn{
+    background:linear-gradient(135deg,#b91c1c,#7f1d1d);
+}
+.clear-btn:hover{background:linear-gradient(135deg,#7f1d1d,#5a1313);}
+
+.delete-btn{
+    background:linear-gradient(135deg,#b91c1c,#7f1d1d);
+    padding:6px 14px;
+    border-radius:8px;
+    font-size:13px;
+    box-shadow:0 4px 12px rgba(185,28,28,0.15);
+    min-width:36px;
+    justify-content:center;
+}
+.delete-btn:hover{
+    transform:scale(1.08) translateY(-2px);
+    box-shadow:0 8px 25px rgba(185,28,28,0.25);
 }
 
+.bottom-tag{
+    position:absolute;
+    bottom:14px;
+    right:32px;
+    font-size:10px;
+    color:#94a3b8;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    background:rgba(255,255,255,0.9);
+    padding:4px 18px;
+    border-radius:30px;
+    border:1px solid #e8edf5;
+    backdrop-filter:blur(4px);
+    box-shadow:0 2px 10px rgba(0,0,0,0.02);
+    z-index:2;
+}
+
+/* Responsive */
 @media(max-width:768px){
-    .app{margin:0;border-radius:0;border:none}
-    .customer-grid{grid-template-columns:110px 1fr;border-radius:4px;}
-    .customer-grid label, .customer-grid input, .customer-grid select{padding:10px;}
-    .customer-grid input:not(:nth-child(4n)), .customer-grid select:not(:nth-child(4n)){border-right:none;}
-    .customer-grid label:not(:nth-child(2n)){border-right:1px solid #e2e8f0;}
-    .customer-grid label, .customer-grid input, .customer-grid select{border-bottom:1px solid #e2e8f0;}
-    .customer-grid label:nth-last-child(3), .customer-grid select:last-child{border-bottom:none;}
+    body{padding:0;background:#f0f4fc;}
+    .app{margin:0;border-radius:0;border:none;box-shadow:none;}
+    .app::before{font-size:120px;letter-spacing:10px;}
+    .topbar{padding:16px 20px;}
+    .topbar h1{font-size:16px;}
+    .topbar h1 i{font-size:16px;padding:6px;margin-right:8px;}
+    .customer-grid{grid-template-columns:100px 1fr;border-radius:12px;}
+    .customer-grid label,.customer-grid input,.customer-grid select{padding:11px 14px;font-size:13px;}
+    .customer-grid input:not(:nth-child(4n)),.customer-grid select:not(:nth-child(4n)){border-right:none;}
+    .customer-grid label:not(:nth-child(2n)){border-right:1px solid #e8edf5;}
+    .customer-grid label,.customer-grid input,.customer-grid select{border-bottom:1px solid #e8edf5;}
+    .customer-grid label:nth-last-child(3),.customer-grid select:last-child{border-bottom:none;}
+    .customer-grid label:nth-child(11),.customer-grid select:nth-child(12){display:none;}
     .photo-preview-box{grid-template-columns:1fr}
-    .bottom-tag{right:16px;bottom:8px}
+    .bottom-tag{right:16px;bottom:10px;font-size:9px;padding:3px 14px;}
+    .form-area{padding:16px 16px 30px;}
+    .photo-section{padding:14px 16px 18px;}
+    .btn-row button{padding:10px 16px;font-size:12px;gap:6px;}
+    .btn-row{gap:10px;}
+    .report-no-badge{font-size:11px;padding:4px 14px;}
+    .badge{font-size:11px;padding:4px 14px;}
+    .table-wrap{border-radius:12px;}
+    th,td{padding:10px 12px;font-size:13px;}
+}
+@media(max-width:480px){
+    .topbar h1{font-size:14px;}
+    .topbar h1 i{font-size:14px;padding:4px;}
+    .topbar{padding:12px 14px;}
+    .report-no-badge{font-size:10px;padding:3px 10px;}
+    .badge{font-size:10px;padding:3px 10px;}
+    .customer-grid label,.customer-grid input,.customer-grid select{padding:9px 12px;font-size:12px;}
+    .customer-grid{grid-template-columns:80px 1fr;}
+    .form-area{padding:12px 12px 24px;}
+    .btn-row button{padding:8px 12px;font-size:11px;}
+    .photo-item img{height:130px;}
+    .app::before{font-size:80px;letter-spacing:5px;}
 }
 </style>
 </head>
@@ -277,78 +572,72 @@ button{
 
 <div class="app" id="reportArea">
     <div class="topbar">
-        <h1>DS CNC ENGINEERING SERVICES</h1>
+        <h1><i class="fas fa-cogs"></i> DHANYASRI CNC</h1>
         <div class="topbar-right">
-            <div class="report-no-badge" id="reportNoDisplay">Report No: 001</div>
-            <div class="badge">Live</div>
+            <div class="report-no-badge" id="reportNoDisplay"><i class="fas fa-hashtag"></i> 001</div>
+            <div class="badge"><i class="fas fa-check-circle"></i> ACTIVE</div>
         </div>
     </div>
 
     <div class="form-area">
+        <!-- Customer Grid (Engineer removed) -->
         <div class="customer-grid">
-            <label>CUSTOMER *</label>
+            <label><i class="fas fa-user"></i> CUSTOMER *</label>
             <input type="text" id="customer" style="text-transform: uppercase;" placeholder="REQUIRED" />
 
-            <label>DATE</label>
+            <label><i class="fas fa-calendar-alt"></i> DATE</label>
             <input type="date" id="date" />
 
-            <label>MC TYPE *</label>
+            <label><i class="fas fa-microchip"></i> MC TYPE *</label>
             <input type="text" id="mcType" style="text-transform: uppercase;" placeholder="REQUIRED" />
 
-            <label>MC NO *</label>
+            <label><i class="fas fa-hashtag"></i> MC NO *</label>
             <input type="text" id="mcNo" style="text-transform: uppercase;" placeholder="REQUIRED" />
 
-            <label>LIST TYPE</label>
+            <label><i class="fas fa-list-ul"></i> LIST TYPE</label>
             <select id="listType" onchange="changeMaterialList(); saveData();">
                 <option value="ACE">Turning</option>
                 <option value="AMS">Milling</option>
             </select>
 
-            <label>ENGINEER *</label>
-            <select id="engineerName" onchange="saveData();">
-                <option value="">Select Engineer</option>
-                <option value="M.Saravanan">M.Saravanan</option>
-                <option value="J.Srinivasan">J.Srinivasan</option>
-                <option value="Dinesh T">Dinesh T</option>
-                <option value="Suresh C">Suresh C</option>
-                <option value="Suresh M">Suresh M</option>
-                <option value="Vignesh M">Vignesh M</option>
-                <option value="Arun S">Arun S</option>
-                <option value="Arun V">Arun V</option>
-                <option value="Pradeep M">Pradeep M</option>
-            </select>
+            <!-- ENGINEER field removed -->
+            <label style="display:none;"></label>
+            <select style="display:none;"></select>
         </div>
 
+        <!-- Photo Upload -->
         <div class="photo-section no-photo" id="photoSection">
-            <label class="photo-label">UPLOAD PHOTOS</label>
+            <label class="photo-label"><i class="fas fa-images"></i> UPLOAD PHOTOS</label>
             <input type="file" id="photoUpload" accept="image/*" multiple onchange="handlePhotoUpload(event)" />
             <div id="photoPreviewBox" class="photo-preview-box">
-                <span>No photos uploaded</span>
+                <span><i class="fas fa-cloud-upload-alt" style="font-size:28px;display:block;margin-bottom:8px;color:#cbd5e1;"></i> No photos uploaded</span>
             </div>
         </div>
 
+        <!-- Table -->
         <div class="table-wrap">
             <table id="materialTable">
                 <thead>
                     <tr>
-                        <th style="width:80px">SL NO</th>
-                        <th>MATERIAL NAME</th>
-                        <th style="width:180px">QTY</th>
-                        <th class="delete-col" style="width:90px">DELETE</th>
+                        <th style="width:70px"><i class="fas fa-hashtag"></i> SL</th>
+                        <th><i class="fas fa-cube"></i> MATERIAL NAME</th>
+                        <th style="width:170px"><i class="fas fa-cubes"></i> QTY</th>
+                        <th class="delete-col" style="width:80px"><i class="fas fa-trash-alt"></i></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody"></tbody>
             </table>
         </div>
 
+        <!-- Buttons -->
         <div class="btn-row">
-            <button class="add-btn" onclick="addRow()"><i class="fa fa-plus"></i> Add Row</button>
-            <button style="background:#475569" onclick="downloadWord()"><i class="fa fa-file-word"></i> Download Word</button>
-            <button class="download-btn" onclick="downloadPDF()"><i class="fa fa-file-pdf"></i> Download PDF</button>
-            <button class="clear-btn" onclick="clearRows()"><i class="fa fa-trash"></i> Clear All</button>
+            <button class="add-btn" onclick="addRow()"><i class="fa fa-plus-circle"></i> Add Row</button>
+            <button class="download-word-btn" onclick="downloadWord()"><i class="fa fa-file-word"></i> Word</button>
+            <button class="download-pdf-btn" onclick="downloadPDF()"><i class="fa fa-file-pdf"></i> PDF</button>
+            <button class="clear-btn" onclick="clearRows()"><i class="fa fa-trash-alt"></i> Clear All</button>
         </div>
         
-        <div class="bottom-tag">Material Checklist</div>
+        <div class="bottom-tag"><i class="fas fa-clipboard-check"></i> Material Checklist</div>
     </div>
 </div>
 
@@ -394,7 +683,7 @@ function incrementReportNumber() {
     let count = parseInt(localStorage.getItem(reportCountKey) || 1);
     count++;
     localStorage.setItem(reportCountKey, count);
-    document.getElementById("reportNoDisplay").textContent = "Report No: " + String(count).padStart(3, '0');
+    document.getElementById("reportNoDisplay").innerHTML = '<i class="fas fa-hashtag"></i> ' + String(count).padStart(3, '0');
 }
 
 function updateMaterialSuggestions(){
@@ -523,7 +812,7 @@ function renderPhotos(){
     box.innerHTML = "";
 
     if(uploadedPhotos.length === 0){
-        box.innerHTML = "<span>No photos uploaded</span>";
+        box.innerHTML = `<span><i class="fas fa-cloud-upload-alt" style="font-size:28px;display:block;margin-bottom:8px;color:#cbd5e1;"></i> No photos uploaded</span>`;
         updatePhotoSectionState();
         return;
     }
@@ -567,7 +856,6 @@ function saveData(){
         mcType: document.getElementById("mcType").value.toUpperCase(),
         mcNo: document.getElementById("mcNo").value.toUpperCase(),
         listType: document.getElementById("listType").value,
-        engineerName: document.getElementById("engineerName").value,
         rows: rows
     };
 
@@ -603,7 +891,6 @@ function loadData(){
         document.getElementById("mcType").value = data.mcType || "";
         document.getElementById("mcNo").value = data.mcNo || "";
         document.getElementById("listType").value = data.listType || "ACE";
-        document.getElementById("engineerName").value = data.engineerName || "";
 
         materialList = document.getElementById("listType").value === "AMS" ? amsMaterialList : aceMaterialList;
         updateMaterialSuggestions();
@@ -632,7 +919,6 @@ function clearRows(){
         document.getElementById("mcType").value = "";
         document.getElementById("mcNo").value = "";
         document.getElementById("listType").value = "ACE";
-        document.getElementById("engineerName").value = "";
         document.getElementById("date").value = getTodayDateString();
         document.getElementById("photoUpload").value = "";
 
@@ -664,13 +950,11 @@ function validateInputFormFields() {
     const customer = document.getElementById("customer").value.trim();
     const mcType = document.getElementById("mcType").value.trim();
     const mcNo = document.getElementById("mcNo").value.trim();
-    const engineer = document.getElementById("engineerName").value;
 
     let missingFields = [];
     if (!customer) missingFields.push("CUSTOMER NAME");
     if (!mcType) missingFields.push("MACHINE TYPE (MC TYPE)");
     if (!mcNo) missingFields.push("MACHINE SERIAL NUMBER (MC NO)");
-    if (!engineer) missingFields.push("ENGINEER");
 
     if (missingFields.length > 0) {
         alert("ERROR: CANNOT DOWNLOAD FILE!\n\nPlease fill out the following required entries:\n❌ " + missingFields.join("\n❌ "));
@@ -711,58 +995,69 @@ async function downloadPDF(){
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
 
-    const curReportNo = "Report No: " + getReportNumber();
+    const curReportNo = "# " + getReportNumber();
     const customer = document.getElementById("customer").value;
     const date = document.getElementById("date").value;
     const mcType = document.getElementById("mcType").value;
     const mcNo = document.getElementById("mcNo").value;
     const listType = selectedText("listType");
-    const engineer = selectedText("engineerName");
 
-    pdf.setFillColor(15, 23, 42);
-    pdf.rect(0, 0, 210, 24, "F");
+    // Premium header
+    pdf.setFillColor(10, 22, 40);
+    pdf.rect(0, 0, 210, 28, "F");
     
     pdf.setFont("Helvetica", "bold");
-    pdf.setFontSize(15);
+    pdf.setFontSize(16);
     pdf.setTextColor(255, 255, 255);
-    pdf.text("DS CNC ENGINEERING SERVICES", 14, 15);
+    pdf.text("DHANYASRI CNC ENGINEERING", 14, 18);
     
     pdf.setFontSize(11);
-    pdf.text(curReportNo, 196, 15, { align: "right" });
+    pdf.setFont("Helvetica", "normal");
+    pdf.setTextColor(232, 184, 75);
+    pdf.text(curReportNo, 196, 18, { align: "right" });
 
-    pdf.setFontSize(12);
-    pdf.setTextColor(51, 65, 85);
-    pdf.text("Material Requirement Report", 105, 34, { align: "center" });
+    // Subtitle with accent
+    pdf.setFontSize(11);
+    pdf.setFont("Helvetica", "bold");
+    pdf.setTextColor(30, 41, 59);
+    pdf.text("Material Requirement Checklist", 105, 38, { align: "center" });
+    
+    // Decorative line
+    pdf.setDrawColor(232, 184, 75);
+    pdf.setLineWidth(0.5);
+    pdf.line(70, 42, 140, 42);
 
+    // Customer info table (Engineer removed)
     pdf.autoTable({
-        startY: 40,
+        startY: 46,
         theme: "plain",
-        styles: { fontSize: 10, cellPadding: 4, textColor: [15, 23, 42], lineColor: [203, 213, 225], lineWidth: 0.3 },
+        styles: { fontSize: 10, cellPadding: 5, textColor: [15, 23, 42], lineColor: [203, 213, 225], lineWidth: 0.3 },
         columnStyles: {
-            0: { fontStyle: "bold", fillColor: [248, 250, 252], cellWidth: 32 },
+            0: { fontStyle: "bold", fillColor: [241, 245, 249], cellWidth: 32 },
             1: { cellWidth: 63 },
-            2: { fontStyle: "bold", fillColor: [248, 250, 252], cellWidth: 32 },
+            2: { fontStyle: "bold", fillColor: [241, 245, 249], cellWidth: 32 },
             3: { cellWidth: 63 }
         },
         body: [
             ["Customer", customer, "Date", date],
             ["Machine Type", mcType, "Serial No", mcNo],
-            ["List Type", listType, "Engineer", engineer]
+            ["List Type", listType, "", ""]
         ],
         willDrawCell: function(data) {
             data.doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height);
         }
     });
 
+    // Material table
     const rows = getRows();
     const tableBodyData = rows.map(r => [r.sl, r.material, r.qty]);
 
     pdf.autoTable({
-        startY: pdf.lastAutoTable.finalY + 8,
+        startY: pdf.lastAutoTable.finalY + 10,
         head: [["SL NO", "MATERIAL NAME", "QTY"]],
         body: tableBodyData,
         theme: "grid",
-        headStyles: { fillColor: [30, 41, 59], textColor: [255, 255, 255], fontStyle: "bold", halign: "center" },
+        headStyles: { fillColor: [10, 22, 40], textColor: [255, 255, 255], fontStyle: "bold", halign: "center" },
         styles: { fontSize: 10, cellPadding: 5, textColor: [15, 23, 42], lineColor: [226, 232, 240] },
         columnStyles: {
             0: { halign: "center", cellWidth: 20, fontStyle: "bold", textColor: [100, 116, 139] },
@@ -771,37 +1066,36 @@ async function downloadPDF(){
         }
     });
 
+    // Photos
     if (uploadedPhotos.length > 0) {
         pdf.addPage();
+        pdf.setFillColor(248, 250, 252);
+        pdf.rect(14, 15, 182, 12, "F");
+        pdf.setDrawColor(232, 184, 75);
+        pdf.setLineWidth(0.5);
+        pdf.rect(14, 15, 182, 12, "S");
         pdf.setFont("Helvetica", "bold");
         pdf.setFontSize(11);
-        pdf.setFillColor(248, 250, 252);
-        pdf.rect(14, 15, 182, 11, "F");
-        
-        pdf.setDrawColor(203, 213, 225);
-        pdf.rect(14, 15, 182, 11, "S");
-        
         pdf.setTextColor(15, 23, 42);
-        pdf.text("ATTACHED REPORT IMAGES", 105, 22, { align: "center" });
+        pdf.text("ATTACHED SERVICE IMAGES", 105, 23, { align: "center" });
 
-        let currentY = 32;
+        let currentY = 34;
         const imgWidth = 86;
         const imgHeight = 65;
         const col1X = 14;
         const col2X = 110;
 
-        pdf.setDrawColor(226, 232, 240);
-
         for (let i = 0; i < uploadedPhotos.length; i++) {
             if (currentY + imgHeight > 280) {
                 pdf.addPage();
-                currentY = 20; 
+                currentY = 20;
             }
             
             const xPos = (i % 2 === 0) ? col1X : col2X;
             
             try {
                 pdf.addImage(uploadedPhotos[i], "JPEG", xPos, currentY, imgWidth, imgHeight);
+                pdf.setDrawColor(226, 232, 240);
                 pdf.rect(xPos, currentY, imgWidth, imgHeight, "S");
             } catch (imgError) {
                 console.error("Failed to render attachment layout element", imgError);
@@ -819,7 +1113,7 @@ async function downloadPDF(){
 
 function buildWordDocument(){
     const rows = getRows();
-    const curReportNo = "Report No: " + getReportNumber();
+    const curReportNo = "# " + getReportNumber();
 
     const materialRows = rows.length
         ? rows.map(row => `
@@ -833,16 +1127,16 @@ function buildWordDocument(){
 
     const photoSection = uploadedPhotos.length
         ? `
-        <h3 style="margin-top:24px;font-family:Arial;color:#1e293b;border-bottom:1px solid #cbd5e1;padding-bottom:6px;page-break-before:always;">Attached Service Photos</h3>
+        <h3 style="margin-top:24px;font-family:Arial;color:#0a1628;border-bottom:3px solid #e8b84b;padding-bottom:8px;page-break-before:always;">Attached Service Photos</h3>
         <table style="width:100%;border:none;">
             ${uploadedPhotos.map((src, idx) => {
                 if (idx % 2 === 0) {
                     return `<tr><td style="border:none;width:50%;padding:8px;text-align:center;">
-                                <img src="${src}" style="width:280px;height:210px;object-fit:contain;border:1px solid #e2e8f0;"/>
+                                <img src="${src}" style="width:280px;height:210px;object-fit:contain;border:1px solid #e8edf5;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.05);"/>
                             </td>`;
                 } else {
                     return `<td style="border:none;width:50%;padding:8px;text-align:center;">
-                                <img src="${src}" style="width:280px;height:210px;object-fit:contain;border:1px solid #e2e8f0;"/>
+                                <img src="${src}" style="width:280px;height:210px;object-fit:contain;border:1px solid #e8edf5;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,0.05);"/>
                             </td></tr>`;
                 }
             }).join("")}
@@ -856,43 +1150,75 @@ function buildWordDocument(){
     <head>
     <meta charset="UTF-8">
     <style>
-    body{font-family:Arial, sans-serif;padding:20px;line-height:1.4;color:#0f172a;}
-    table{border-collapse:collapse;width:100%;margin-bottom:16px;}
+    body{font-family:Arial, sans-serif;padding:20px;line-height:1.4;color:#0a1922;position:relative;}
+    body::before{
+        content:'DS';
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%) rotate(-25deg);
+        font-size:180px;
+        font-weight:900;
+        color:rgba(10,22,40,0.04);
+        letter-spacing:15px;
+        pointer-events:none;
+        z-index:0;
+        font-family:'Segoe UI',sans-serif;
+        user-select:none;
+        white-space:nowrap;
+    }
+    table{border-collapse:collapse;width:100%;margin-bottom:16px;position:relative;z-index:1;}
     td,th{border:1px solid #cbd5e1;padding:8px;font-size:12px;vertical-align:middle;}
-    th{background:#1e293b;color:#ffffff;font-weight:bold;}
-    .hdr{background:#0f172a;color:#ffffff;padding:14px;}
+    th{background:#0a1628;color:#ffffff;font-weight:bold;}
+    .gold{color:#e8b84b;}
+    .brand-header{background:#0a1628;padding:14px 20px;border-radius:6px;position:relative;z-index:1;}
+    .content-wrap{position:relative;z-index:1;}
     </style>
     </head>
     <body>
-    <table style="width:100%;background:#0f172a;margin-bottom:20px;border:none;">
+    <div class="content-wrap">
+    <table style="width:100%;background:#0a1628;margin-bottom:20px;border:none;border-radius:8px;">
         <tr>
-            <td style="border:none;padding:10px;"><h3 style="margin:0;color:#ffffff;font-size:16px;">DS CNC ENGINEERING SERVICES</h3></td>
-            <td style="border:none;padding:10px;text-align:right;"><h4 style="margin:0;color:#ffffff;font-size:12px;">${curReportNo}</h4></td>
+            <td style="border:none;padding:14px 20px;">
+                <h3 style="margin:0;color:#ffffff;font-size:17px;font-weight:700;">
+                    <span style="color:#e8b84b;">◆</span> DHANYASRI CNC ENGINEERING
+                </h3>
+            </td>
+            <td style="border:none;padding:14px 20px;text-align:right;">
+                <h4 style="margin:0;color:#e8b84b;font-size:13px;font-weight:700;">${curReportNo}</h4>
+            </td>
         </tr>
     </table>
-    <br/>
+    
+    <div style="text-align:center;margin-bottom:16px;">
+        <h3 style="color:#1a2a4a;font-size:15px;margin:0;letter-spacing:1px;">MATERIAL REQUIREMENT CHECKLIST</h3>
+        <div style="width:80px;height:3px;background:#e8b84b;margin:6px auto;"></div>
+    </div>
+    
     <table>
     <tr>
-    <td style="background:#f8fafc;font-weight:bold;width:18%;">Customer</td>
+    <td style="background:#f1f5f9;font-weight:bold;width:18%;color:#1e293b;">Customer</td>
     <td style="width:32%;">${escapeHtml(document.getElementById("customer").value)}</td>
-    <td style="background:#f8fafc;font-weight:bold;width:18%;">Date</td>
+    <td style="background:#f1f5f9;font-weight:bold;width:18%;color:#1e293b;">Date</td>
     <td style="width:32%;">${escapeHtml(document.getElementById("date").value)}</td>
     </tr>
     <tr>
-    <td style="background:#f8fafc;font-weight:bold;">Machine Type</td>
+    <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;">Machine Type</td>
     <td>${escapeHtml(document.getElementById("mcType").value)}</td>
-    <td style="background:#f8fafc;font-weight:bold;">Serial No</td>
+    <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;">Serial No</td>
     <td>${escapeHtml(document.getElementById("mcNo").value)}</td>
     </tr>
     <tr>
-    <td style="background:#f8fafc;font-weight:bold;">List Type</td>
+    <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;">List Type</td>
     <td>${escapeHtml(selectedText("listType"))}</td>
-    <td style="background:#f8fafc;font-weight:bold;">Engineer</td>
-    <td>${escapeHtml(selectedText("engineerName"))}</td>
+    <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;"></td>
+    <td></td>
     </tr>
     </table>
 
-    <h3 style="font-size:14px;margin-top:20px;color:#1e293b;">Required Materials & Spares</h3>
+    <h3 style="font-size:14px;margin-top:22px;color:#0a1628;border-bottom:2px solid #e8b84b;padding-bottom:6px;">
+        <span style="color:#e8b84b;">■</span> Required Materials & Spares
+    </h3>
     <table>
     <tr>
     <th style="width:12%">SL NO</th>
@@ -903,6 +1229,11 @@ function buildWordDocument(){
     </table>
 
     ${photoSection}
+    <br/>
+    <p style="font-size:10px;color:#94a3b8;text-align:center;border-top:2px solid #e8b84b;padding-top:12px;margin-top:18px;letter-spacing:1px;">
+        DHANYASRI CNC · Material Checklist
+    </p>
+    </div>
     </body>
     </html>`;
 }
@@ -929,14 +1260,14 @@ function downloadWord(){
     incrementReportNumber();
 }
 
-document.querySelectorAll("#customer,#date,#mcType,#mcNo,#listType,#engineerName").forEach(input => {
+document.querySelectorAll("#customer,#date,#mcType,#mcNo,#listType").forEach(input => {
     input.addEventListener("input", saveData);
     input.addEventListener("change", saveData);
 });
 
 window.addEventListener("DOMContentLoaded", () => {
     updateMaterialSuggestions();
-    document.getElementById("reportNoDisplay").textContent = "Report No: " + getReportNumber();
+    document.getElementById("reportNoDisplay").innerHTML = '<i class="fas fa-hashtag"></i> ' + getReportNumber();
     if(!loadData()){
         document.getElementById("date").value = getTodayDateString();
         addRow();
