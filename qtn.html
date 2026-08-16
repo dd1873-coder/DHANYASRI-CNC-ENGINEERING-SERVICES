@@ -150,7 +150,7 @@ body{
     z-index:1;
 }
 
-/* Customer grid – premium card (6 fields, 3 rows) */
+/* Customer grid – premium card */
 .customer-grid{
     display:grid;
     grid-template-columns:140px 1fr 140px 1fr;
@@ -219,16 +219,6 @@ body{
 .customer-grid select:last-child,
 .customer-grid label:nth-last-child(4),
 .customer-grid input:nth-last-child(3){
-    border-bottom:none;
-}
-/* Hide the engineer row (last row) */
-.customer-grid label:nth-child(11),
-.customer-grid select:nth-child(12){
-    display:none;
-}
-/* Adjust last visible row to have no bottom border */
-.customer-grid label:nth-child(9),
-.customer-grid input:nth-child(10){
     border-bottom:none;
 }
 
@@ -539,7 +529,6 @@ button:active{
     .customer-grid label:not(:nth-child(2n)){border-right:1px solid #e8edf5;}
     .customer-grid label,.customer-grid input,.customer-grid select{border-bottom:1px solid #e8edf5;}
     .customer-grid label:nth-last-child(3),.customer-grid select:last-child{border-bottom:none;}
-    .customer-grid label:nth-child(11),.customer-grid select:nth-child(12){display:none;}
     .photo-preview-box{grid-template-columns:1fr}
     .bottom-tag{right:16px;bottom:10px;font-size:9px;padding:3px 14px;}
     .form-area{padding:16px 16px 30px;}
@@ -580,7 +569,7 @@ button:active{
     </div>
 
     <div class="form-area">
-        <!-- Customer Grid (Engineer removed) -->
+        <!-- Customer Grid -->
         <div class="customer-grid">
             <label><i class="fas fa-user"></i> CUSTOMER *</label>
             <input type="text" id="customer" style="text-transform: uppercase;" placeholder="REQUIRED" />
@@ -600,9 +589,23 @@ button:active{
                 <option value="AMS">Milling</option>
             </select>
 
-            <!-- ENGINEER field removed -->
-            <label style="display:none;"></label>
-            <select style="display:none;"></select>
+            <label><i class="fas fa-industry"></i> M/C MAKE *</label>
+            <select id="mcMake" onchange="saveData();">
+                <option value="">Select Make</option>
+                <option value="ACE">ACE</option>
+                <option value="AMS">AMS</option>
+                <option value="LMW">LMW</option>
+                <option value="HMT">HMT</option>
+                <option value="BFW">BFW</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Doosan">Doosan</option>
+                <option value="Mazak">Mazak</option>
+                <option value="Haas">Haas</option>
+                <option value="Okuma">Okuma</option>
+                <option value="DMG Mori">DMG Mori</option>
+                <option value="Makino">Makino</option>
+                <option value="Other">Other</option>
+            </select>
         </div>
 
         <!-- Photo Upload -->
@@ -856,6 +859,7 @@ function saveData(){
         mcType: document.getElementById("mcType").value.toUpperCase(),
         mcNo: document.getElementById("mcNo").value.toUpperCase(),
         listType: document.getElementById("listType").value,
+        mcMake: document.getElementById("mcMake").value,
         rows: rows
     };
 
@@ -891,6 +895,7 @@ function loadData(){
         document.getElementById("mcType").value = data.mcType || "";
         document.getElementById("mcNo").value = data.mcNo || "";
         document.getElementById("listType").value = data.listType || "ACE";
+        document.getElementById("mcMake").value = data.mcMake || "";
 
         materialList = document.getElementById("listType").value === "AMS" ? amsMaterialList : aceMaterialList;
         updateMaterialSuggestions();
@@ -919,6 +924,7 @@ function clearRows(){
         document.getElementById("mcType").value = "";
         document.getElementById("mcNo").value = "";
         document.getElementById("listType").value = "ACE";
+        document.getElementById("mcMake").value = "";
         document.getElementById("date").value = getTodayDateString();
         document.getElementById("photoUpload").value = "";
 
@@ -950,11 +956,13 @@ function validateInputFormFields() {
     const customer = document.getElementById("customer").value.trim();
     const mcType = document.getElementById("mcType").value.trim();
     const mcNo = document.getElementById("mcNo").value.trim();
+    const mcMake = document.getElementById("mcMake").value;
 
     let missingFields = [];
     if (!customer) missingFields.push("CUSTOMER NAME");
     if (!mcType) missingFields.push("MACHINE TYPE (MC TYPE)");
     if (!mcNo) missingFields.push("MACHINE SERIAL NUMBER (MC NO)");
+    if (!mcMake) missingFields.push("M/C MAKE");
 
     if (missingFields.length > 0) {
         alert("ERROR: CANNOT DOWNLOAD FILE!\n\nPlease fill out the following required entries:\n❌ " + missingFields.join("\n❌ "));
@@ -1001,6 +1009,7 @@ async function downloadPDF(){
     const mcType = document.getElementById("mcType").value;
     const mcNo = document.getElementById("mcNo").value;
     const listType = selectedText("listType");
+    const mcMake = selectedText("mcMake");
 
     // Premium header
     pdf.setFillColor(10, 22, 40);
@@ -1027,7 +1036,7 @@ async function downloadPDF(){
     pdf.setLineWidth(0.5);
     pdf.line(70, 42, 140, 42);
 
-    // Customer info table (Engineer removed)
+    // Customer info table
     pdf.autoTable({
         startY: 46,
         theme: "plain",
@@ -1041,7 +1050,7 @@ async function downloadPDF(){
         body: [
             ["Customer", customer, "Date", date],
             ["Machine Type", mcType, "Serial No", mcNo],
-            ["List Type", listType, "", ""]
+            ["List Type", listType, "M/C Make", mcMake]
         ],
         willDrawCell: function(data) {
             data.doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height);
@@ -1211,8 +1220,8 @@ function buildWordDocument(){
     <tr>
     <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;">List Type</td>
     <td>${escapeHtml(selectedText("listType"))}</td>
-    <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;"></td>
-    <td></td>
+    <td style="background:#f1f5f9;font-weight:bold;color:#1e293b;">M/C Make</td>
+    <td>${escapeHtml(selectedText("mcMake"))}</td>
     </tr>
     </table>
 
@@ -1260,7 +1269,7 @@ function downloadWord(){
     incrementReportNumber();
 }
 
-document.querySelectorAll("#customer,#date,#mcType,#mcNo,#listType").forEach(input => {
+document.querySelectorAll("#customer,#date,#mcType,#mcNo,#listType,#mcMake").forEach(input => {
     input.addEventListener("input", saveData);
     input.addEventListener("change", saveData);
 });
